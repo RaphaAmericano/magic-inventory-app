@@ -12,9 +12,6 @@ const Home = React.lazy(async () => import("../pages/Home"));
 const About = React.lazy(async () => import("../pages/About"));
 const Login = React.lazy(async () => import("../pages/Login"));
 const Signin = React.lazy(async () => import("../pages/Signin"));
-const ListResumes = React.lazy(async () => import("../pages/Resumes/ListResumes"));
-const EditResumes = React.lazy(async () => import("../pages/Resumes/EditResumes"));
-const NewResumes = React.lazy(async () => import("../pages/Resumes/NewResumes"));
 
 const menu = [
   { to:"/", text:"Home", private: false },
@@ -46,11 +43,7 @@ export function App() {
           </Route>
 
             <Route element={<PrivatePages />}>
-              <Route path="/resumes">
-                <Route index element={<ListResumes />} />
-                <Route path="new" element={<NewResumes />} />
-                <Route path=":id" element={<EditResumes />} />
-              </Route>
+              
             <Route path="/" element={<Home />} />
           </Route>
           
