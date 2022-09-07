@@ -1,0 +1,5 @@
+/environments
+/build
+/.githooks
+/jest.config.js
+/webpack.config.js

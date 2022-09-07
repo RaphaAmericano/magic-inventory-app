@@ -1,0 +1,21 @@
+{
+  "extends": ["@cubos"],
+  "plugins": ["eslint-plugin-import-helpers"],
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "import/order": ["off"],
+    "import-helpers/order-imports": [
+      "error",
+      {
+        "newlinesBetween": "ignore",
+        "groups": [
+          "module",
+          ["/^@stores/", "/^@hooks/"],
+          ["/^@pages/", "/^@components/"],
+          ["/^@assets/images/", "/^@assets/icons/"],
+          ["parent", "sibling", "index"]
+        ]
+      }
+    ]
+  }
+}
