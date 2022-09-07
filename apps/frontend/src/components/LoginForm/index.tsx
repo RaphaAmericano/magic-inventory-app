@@ -1,4 +1,5 @@
 import { Grid, TextField, Typography,  Button } from "@mui/material";
+import { TextInput } from "@components/TextInput";
 import { useLoginForm } from "./loginFormHook";
 import type { IFields } from "./loginFormHook";
 import { authQueries } from "@hooks/queries";
@@ -23,17 +24,15 @@ export function LoginForm(){
     }
 
     return  <form onSubmit={loginForm.handleSubmit(onSubmit, onError)}>
-                <Grid container spacing={2}>
-                    <Grid direction="column" container item xs={12}>
-                        <Typography variant="body2">Email</Typography>
-                        <TextField type="email" {...loginForm.register('email')}/>
+                <Grid container direction="column" spacing={2}>
+                    <Grid item>
+                        <TextInput type="email" label="Email" name="email" form={loginForm}/>
                     </Grid>
-                    <Grid direction="column" container item xs={12}>
-                        <Typography variant="body2">Password</Typography>
-                        <TextField type="password" {...loginForm.register('password')}/>
+                    <Grid item>
+                        <TextInput type="password" label="Password" name="password" form={loginForm}/>
                     </Grid>
-                    <Grid direction="column" container item xs={12}>
-                        <Button variant="contained" type="submit">Entrar</Button>
+                    <Grid item>
+                        <Button variant="outlined" type="submit">Entrar</Button>
                     </Grid>
                 </Grid>
             </form>

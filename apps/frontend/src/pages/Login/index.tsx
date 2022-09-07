@@ -13,20 +13,21 @@ function Login(){
     }
 
     return (<Container maxWidth="sm">
-        <Grid container>
+        <Grid container spacing={2} direction="column">
             <Grid item>
                 <Typography variant="h3">Login</Typography>
             </Grid>
-            
+
             <Grid item>
                 <LoginForm />
+            </Grid>
+            <Grid item>
                 <Button variant="outlined" onClick={passwordRecover}>Esqueci a senha</Button>
             </Grid>
             <Grid item>
                 <Typography variant="subtitle1">Não possui cadastro?</Typography>
                 <Button variant="outlined" onClick={goSignin}>Cadastre-se!</Button>
             </Grid>
-
         </Grid>
     </Container>)
 }
