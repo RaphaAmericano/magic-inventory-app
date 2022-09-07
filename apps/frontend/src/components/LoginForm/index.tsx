@@ -1,4 +1,5 @@
-import { useLoginForm } from "./loginFormHook"
+import { Grid, TextField, Typography,  Button } from "@mui/material";
+import { useLoginForm } from "./loginFormHook";
 import type { IFields } from "./loginFormHook";
 import { authQueries } from "@hooks/queries";
 import { useStores } from "@stores/index";
@@ -6,7 +7,6 @@ import { useStores } from "@stores/index";
 export function LoginForm(){
     const loginForm = useLoginForm();
     const useAuthUser = authQueries.useAuthUser();
-
 
     async function onSubmit(data:IFields){
         console.log(data)
@@ -22,17 +22,19 @@ export function LoginForm(){
         console.log(error);
     }
 
-    return <form onSubmit={loginForm.handleSubmit(onSubmit, onError)}>
-        <div>
-            <label>Email</label>
-            <input type="email" {...loginForm.register('email')}/>
-        </div>
-        <div>
-            <label>Password</label>
-            <input type="password" {...loginForm.register('password')}/>
-        </div>
-        <div>
-            <button type="submit">Entrar</button>
-        </div>
-    </form>
+    return  <form onSubmit={loginForm.handleSubmit(onSubmit, onError)}>
+                <Grid container spacing={2}>
+                    <Grid direction="column" container item xs={12}>
+                        <Typography variant="body2">Email</Typography>
+                        <TextField type="email" {...loginForm.register('email')}/>
+                    </Grid>
+                    <Grid direction="column" container item xs={12}>
+                        <Typography variant="body2">Password</Typography>
+                        <TextField type="password" {...loginForm.register('password')}/>
+                    </Grid>
+                    <Grid direction="column" container item xs={12}>
+                        <Button variant="contained" type="submit">Entrar</Button>
+                    </Grid>
+                </Grid>
+            </form>
 }

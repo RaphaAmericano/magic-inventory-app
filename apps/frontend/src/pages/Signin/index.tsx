@@ -1,4 +1,5 @@
-import { Container } from "@components/Container";
+
+import { Container, Typography, Button } from "@mui/material";
 import { SigninForm } from "@components/SIgninForm";
 import { useNavigate } from "react-router-dom";
 
@@ -10,13 +11,13 @@ function Signin(){
     }
 
     return (<Container>
-        <h2>Sigin</h2>
+        <Typography>Sigin</Typography>
         <div>
             <SigninForm />
         </div>
         <div>
             <p>Já possui cadstro?</p>
-            <button onClick={goLogin}>Entrar</button>
+            <Button variant="contained" onClick={goLogin}>Entrar</Button>
         </div>
     </Container>)
 }

@@ -1,4 +1,4 @@
-import { Container } from "@components/Container";
+import { Container, Box, Grid, Typography, Button } from "@mui/material";
 import { LoginForm } from "@components/LoginForm";
 import { useNavigate } from "react-router-dom";
 
@@ -12,16 +12,22 @@ function Login(){
         console.log("recover");
     }
 
-    return (<Container>
-        <h2>Login</h2>
-        <div>
-            <LoginForm />
-            <button type="button" onClick={passwordRecover}>Esqueci a senha</button>
-        </div>
-        <div>
-            <p>Não possui cadastro?</p>
-            <button onClick={goSignin}>Cadastre-se!</button>
-        </div>
+    return (<Container maxWidth="sm">
+        <Grid container>
+            <Grid item>
+                <Typography variant="h3">Login</Typography>
+            </Grid>
+            
+            <Grid item>
+                <LoginForm />
+                <Button variant="outlined" onClick={passwordRecover}>Esqueci a senha</Button>
+            </Grid>
+            <Grid item>
+                <Typography variant="subtitle1">Não possui cadastro?</Typography>
+                <Button variant="outlined" onClick={goSignin}>Cadastre-se!</Button>
+            </Grid>
+
+        </Grid>
     </Container>)
 }
 
