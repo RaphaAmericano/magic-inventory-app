@@ -42,9 +42,10 @@ export function App() {
             <Route path="/signin" element={<Signin />} />
           </Route>
 
-            <Route element={<PrivatePages />}>
-              
-            <Route path="/" element={<Home />} />
+          <Route element={<PrivatePages />}>
+            
+          <Route path="/" element={<Home />} />
+            
           </Route>
           
           <Route path="*" element={<Navigate to="/login" />} />

@@ -17,7 +17,6 @@ function Login(){
             <Grid item>
                 <Typography variant="h3">Login</Typography>
             </Grid>
-
             <Grid item>
                 <LoginForm />
             </Grid>
