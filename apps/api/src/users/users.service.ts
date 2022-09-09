@@ -27,7 +27,7 @@ export class UsersService {
     }
   }
 
-  async findByEmail(email: string){
+  async findByEmail(email: string) {
     try {
       const user = await this.userModel.findOne({ email }).exec();
       return user;
@@ -36,27 +36,14 @@ export class UsersService {
     }
   }
 
-  // async findOne(params: {
-  //   skip?: number;
-  //   take?: number;
-  //   cursor?: Prisma.UserWhereUniqueInput;
-  //   where?: Prisma.UserWhereInput;
-  //   orderBy?: Prisma.UserOrderByWithRelationInput;
-  // }): Promise<User[]> {
-  //   const { skip, take, cursor, where, orderBy } = params;
-  //   try {
-  //     const user = await this.prisma.user.findMany({
-  //       skip,
-  //       take,
-  //       cursor,
-  //       where,
-  //       orderBy,
-  //     });
-  //     return user;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async findOne(id: number) {
+    try {
+      const user = await this.userModel.findById(id);
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // async findUnique(params: {
   //   where: Prisma.UserWhereUniqueInput;
@@ -67,29 +54,21 @@ export class UsersService {
   //   return user;
   // }
 
-  // async findByEmail(email: string) {
-  //   return await this.prisma.user.findUnique({ where: { email } });
-  // }
+  async update(id: string, user: User) {
+    // try {
+    //   const updatedUser = await this.userModel.findByIdAndUpdate(id, user).exec();
+    //   return updatedUser;
+    // } catch (error) {
+    //   throw error;
+    // }
+  }
 
-  // async update(params: {
-  //   where: Prisma.UserWhereUniqueInput;
-  //   data: UpdateUserDto;
-  // }): Promise<User> {
-  //   const { where, data } = params;
-  //   try {
-  //     const user = await this.prisma.user.update({ data, where });
-  //     return user;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
-  // async remove(where: Prisma.UserWhereUniqueInput): Promise<User> {
-  //   try {
-  //     const user = await this.prisma.user.delete({ where });
-  //     return user;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async remove(id: string) {
+    try {
+      const user = await this.userModel.findOneAndDelete({ _id: id }).exec();
+      return user.remove();
+    } catch (error) {
+      throw error;
+    }
+  }
 }

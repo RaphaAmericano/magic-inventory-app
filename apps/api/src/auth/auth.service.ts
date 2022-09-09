@@ -22,7 +22,7 @@ export class AuthService {
       if (!valid) throw new UnauthorizedException('Invalid Password');
 
       // return { token: this.jwtService.sign({ email }), ...user };
-      return {  ...user };
+      return { ...user };
     } catch (error) {
       throw new Error('Server Error');
     }

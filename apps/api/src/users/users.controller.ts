@@ -15,6 +15,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { AuthUserDto } from './dto/auth-user.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from 'src/auth/auth.service';
+import { User } from './entities/user.entity';
 
 @ApiTags('users')
 @Controller('users')
@@ -39,18 +40,15 @@ export class UsersController {
   //   return this.usersService.findOne({ where: { id: +id } });
   // }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-  //   return this.usersService.update({
-  //     where: { id: +id },
-  //     data: updateUserDto,
-  //   });
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateUserDto: User) {
+    return this.usersService.update(id, updateUserDto);
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.usersService.remove({ id: +id });
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usersService.remove(id);
+  }
 
   // @UseGuards(AuthGuard('local'))
   @Post('auth')
