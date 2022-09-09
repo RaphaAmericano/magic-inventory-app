@@ -1,8 +1,9 @@
 import { Connection } from 'mongoose';
-import { UserSchema } from './dto/user.schema';
+// import { UserSchema } from './dto/user.schema';
+import { UserSchema } from './entities/user.entity';
 import { MODEL, DATABASE } from '../database/database.constants';
 
-export const UsersProviders = [
+export const usersProviders = [
   {
     provide: MODEL.USER,
     useFactory: (connection: Connection) =>

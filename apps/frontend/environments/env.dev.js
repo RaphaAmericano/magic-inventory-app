@@ -1,4 +1,4 @@
 module.exports = {
   "ENV": "development",
-  "API_URL": "http://localhost:3002"
+  "API_URL": "http://localhost:3000"
 }
