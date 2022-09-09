@@ -1,32 +1,33 @@
-import { useStores } from "@stores/index";
 import { Container } from "@components/Container";
+import { Drawer } from "@components/Drawer";
 import { Button } from "@components/Button";
 
 import css from "./style.module.scss";
 
 function Home() {
-  const { counterStore } = useStores();
 
   return (
-    <Container className={css.container}>
-      <h1 className={css.count} data-testid="count">
-        {counterStore.count}
-      </h1>
+    <Drawer>
+      <Container className={css.container}>
+        <h1 className={css.count} >
+          Drawer teste 
+        </h1>
 
-      <div className={css.actions}>
-        <Button theme="primary" onClick={counterStore.increment}>
-          Incrementar
-        </Button>
+        <div className={css.actions}>
+          <Button theme="primary">
+            Incrementar
+          </Button>
 
-        <Button theme="secondary" onClick={counterStore.reset}>
-          Resetar
-        </Button>
+          <Button theme="secondary">
+            Resetar
+          </Button>
 
-        <Button theme="primary" onClick={counterStore.decrement}>
-          Decrementar
-        </Button>
-      </div>
-    </Container>
+          <Button theme="primary">
+            Decrementar
+          </Button>
+        </div>
+      </Container>
+    </Drawer>
   );
 }
 
