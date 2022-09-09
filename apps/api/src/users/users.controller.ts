@@ -6,18 +6,26 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { AuthUserDto } from './dto/auth-user.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthService } from 'src/auth/auth.service';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
     return this.usersService.create(createUserDto);
   }
 
@@ -26,18 +34,28 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.usersService.findOne({ where: { id: +id } });
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  //   return this.usersService.update({
+  //     where: { id: +id },
+  //     data: updateUserDto,
+  //   });
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.usersService.remove({ id: +id });
+  // }
+
+  // @UseGuards(AuthGuard('local'))
+  @Post('auth')
+  auth(@Body() authUserDto: AuthUserDto) {
+    const { email, password } = authUserDto;
+    return this.authService.authUser(email, password);
   }
 }

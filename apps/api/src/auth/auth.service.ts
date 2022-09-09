@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import { AuthDto } from './dto/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -14,18 +13,18 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async authUser(authDto: AuthDto) {
-    const { email, password } = authDto;
-    // try {
-    //   const user = await this.usersService.findByEmail(email);
-    //   if (!user) throw new NotFoundException('User not found');
+  async authUser(email: string, password: string) {
+    try {
+      const user = await this.usersService.findByEmail(email);
+      if (!user) throw new NotFoundException('User not found');
 
-    //   const valid = password === user.password;
-    //   if (!valid) throw new UnauthorizedException('Invalid Password');
+      const valid = password === user.password;
+      if (!valid) throw new UnauthorizedException('Invalid Password');
 
-    //   return { token: this.jwtService.sign({ email }), ...user };
-    // } catch (error) {
-    //   throw new Error('Server Error');
-    // }
+      // return { token: this.jwtService.sign({ email }), ...user };
+      return {  ...user };
+    } catch (error) {
+      throw new Error('Server Error');
+    }
   }
 }

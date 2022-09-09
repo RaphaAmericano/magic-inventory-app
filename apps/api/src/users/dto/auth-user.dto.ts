@@ -1,8 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsEmail } from 'class-validator';
-import { User } from 'entities';
 
-export class AuthDto implements Omit<User, 'name' | 'id'> {
+export class AuthUserDto {
   @IsNotEmpty()
   @IsEmail()
   @ApiProperty()
