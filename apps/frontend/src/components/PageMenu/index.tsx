@@ -1,13 +1,18 @@
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-interface IMenuProps {
-    text: string;
-    to: string;
-}
+import { NavLink } from "react-router-dom";
+import { PageMenuItem } from "./PageMenuItem";
+import type { IProps as IMenuProps } from "./PageMenuItem";
+import css from "./style.module.scss";
+
 interface IProps {
-    menu: IMenuProps[]
+  menu: IMenuProps[];
 }
-export function PageMenu(props: IProps){
-    const { menu } = props;
-    return <nav>{menu.map(({ text, to }) => <Link to={to}>{text}</Link>)}</nav>
+
+export function PageMenu(props: IProps) {
+  const { menu } = props;
+  return (
+    <nav className={css.page_menu_nav}>
+      {menu.map((item) => <PageMenuItem key={item.text} {...item} />)}
+    </nav>
+  );
 }
