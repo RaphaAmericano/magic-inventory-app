@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { DrawerContainer } from "@components/DrawerContainer";
 import { Navigate, Outlet } from "react-router-dom";
 import { useStores } from "../stores";
 
@@ -11,6 +12,8 @@ export function PrivatePages(){
     }
 
     return <Suspense fallback={null}>
-        <Outlet />
+        <DrawerContainer>
+            <Outlet />
+        </DrawerContainer>
     </Suspense>
 }

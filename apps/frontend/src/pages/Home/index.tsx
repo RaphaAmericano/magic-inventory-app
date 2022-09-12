@@ -5,7 +5,7 @@ import { DrawerContainer } from "@components/DrawerContainer";
 
 function Home() {
   return (
-    <DrawerContainer>
+    <>
         <Typography variant="h1">Bem vindo</Typography>
 
         <div className={css.actions}>
@@ -15,7 +15,7 @@ function Home() {
 
           <Button>Decrementar</Button>
         </div>
-    </DrawerContainer>
+    </>
   );
 }
 

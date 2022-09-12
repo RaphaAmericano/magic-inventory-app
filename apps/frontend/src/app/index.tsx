@@ -6,18 +6,22 @@ import { Footer } from "@components/Footer";
 import { PublicPages } from "../routes/PublicRoutes";
 import { PrivatePages } from "../routes/PrivateRoutes";
 import { useStores } from "@stores/index";
+
 // Pages
 
 const Home = React.lazy(async () => import("../pages/Home"));
 const About = React.lazy(async () => import("../pages/About"));
 const Login = React.lazy(async () => import("../pages/Login"));
 const Signin = React.lazy(async () => import("../pages/Signin"));
+const Inventory = React.lazy(async () => import("../pages/Inventory"));
+const Collections = React.lazy(async () => import("../pages/Collections"));
+const Wishlists = React.lazy(async () => import("../pages/Wishlists"));
+const Charts = React.lazy(async () => import("../pages/Charts"));
 
 const menu = [
   { to:"/login", text:"Login", private: false },
   { to:"/signin", text:"Signin", private: false },
 ];
-
 
 export function App() {
   const { authStore } = useStores()
@@ -39,6 +43,10 @@ export function App() {
 
           <Route element={<PrivatePages />}>
             <Route path="/" element={<Home />} />
+            <Route path="/inventory" element={<Inventory />}/>
+            <Route path="/collections" element={<Collections />}/>
+            <Route path="/wishlists" element={<Wishlists />}/>
+            <Route path="/charts" element={<Charts />}/>
           </Route>
           
           <Route path="*" element={<Navigate to="/login" />} />

@@ -21,6 +21,7 @@ import { DrawerBar } from "./DrawerBar";
 import { Drawer } from "./Drawer";
 import { DrawerUserContent } from "./DrawerUserContent";
 import { useStores } from "@stores/index";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -32,6 +33,7 @@ export function DrawerContainer(props: IProps) {
   const { children } = props;
   const [open, setOpen] = React.useState(false);
 
+  const navigate = useNavigate();
   const { authStore } = useStores();
   const { logout } = authStore;
 
@@ -44,10 +46,10 @@ export function DrawerContainer(props: IProps) {
   };
 
   const menuItems = [
-    { text: "Inventário", icon: <InventoryIcon /> },
-    { text: "Coleções", icon: <ViewListIcon /> },
-    { text: "Wishlist", icon: <StarBorderIcon /> },
-    { text: "Gráficos", icon: <BarChartIcon /> }
+    { text: "Inventário", icon: <InventoryIcon /> , to: "inventory" },
+    { text: "Coleções", icon: <ViewListIcon /> , to: "collections"},
+    { text: "Wishlists", icon: <StarBorderIcon />, to: "wishlists" },
+    { text: "Gráficos", icon: <BarChartIcon />, to: "charts" }
   ];
 
   return (
@@ -80,8 +82,8 @@ export function DrawerContainer(props: IProps) {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuItems.map(({ text, icon }, index) => (
-            <DrawerListItem key={text} text={text} icon={icon} open={open} />
+          {menuItems.map(({ text, icon, to }, index) => (
+            <DrawerListItem key={text} text={text} icon={icon} open={open} onClick={() => navigate(`/${to}`)} />
           ))}
         </List>
         <Divider />
