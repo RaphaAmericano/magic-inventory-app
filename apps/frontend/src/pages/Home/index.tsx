@@ -1,5 +1,4 @@
-import { Container } from "@components/Container";
-import { Button } from "@components/Button";
+import { Typography, Button } from "@mui/material";
 
 import css from "./style.module.scss";
 import { DrawerContainer } from "@components/DrawerContainer";
@@ -7,14 +6,14 @@ import { DrawerContainer } from "@components/DrawerContainer";
 function Home() {
   return (
     <DrawerContainer>
-        <h1 className={css.count}>DrawerContainer teste</h1>
+        <Typography variant="h1">Bem vindo</Typography>
 
         <div className={css.actions}>
-          <Button theme="primary">Incrementar</Button>
+          <Button>Incrementar</Button>
 
-          <Button theme="secondary">Resetar</Button>
+          <Button>Resetar</Button>
 
-          <Button theme="primary">Decrementar</Button>
+          <Button>Decrementar</Button>
         </div>
     </DrawerContainer>
   );

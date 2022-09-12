@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -13,17 +12,18 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { DrawerHeader } from "./DrawerHeader";
-import { closedMixin, openedMixin } from "./mixins";
 import { DrawerListItem } from "./DrawerListItem";
 import { DrawerBar } from "./DrawerBar";
 import { Drawer } from "./Drawer";
+import { DrawerUserContent } from "./DrawerUserContent";
 
 // const mockArr = ["Inbox", "Starred", "Send email", "Drafts"];
 const mockArr = [
-  { text: "Inbox", icon: <MailIcon /> },
-  { text: "Starred", icon: <MailIcon /> },
-  { text: "Send email", icon: <InboxIcon /> },
-  { text: "Drafts", icon: <MailIcon /> }
+  { text: "Inventário", icon: <MailIcon /> },
+  { text: "Coleções", icon: <MailIcon /> },
+  { text: "Wishlist", icon: <InboxIcon /> },
+  { text: "Gráficos", icon: <MailIcon /> },
+  { text: "Sair", icon: <MailIcon /> }
 ];
 
 const drawerWidth = 240;
@@ -68,6 +68,7 @@ export function DrawerContainer(props: IProps) {
       </DrawerBar>
       <Drawer variant="permanent" open={open} drawerWidth={drawerWidth}>
         <DrawerHeader>
+          {open && <DrawerUserContent />}
           <IconButton onClick={handleDrawerClose}>
             {!open ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>

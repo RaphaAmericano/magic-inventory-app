@@ -1,12 +1,16 @@
-import {  useState } from "react";
+import { useState } from "react";
+import { User } from "entities";
 
 interface AuthUser {
   token: string;
-  id: number;
-  email: string;
-  name: string;
-  password: string;
+  _doc: UserDoc
 }
+
+interface UserDoc extends Omit<User, "password" | "id" >{
+  _id: string;
+  __v: number;
+}
+
 
 export function useAuth() {
   const [auth, setAuth] = useState(false);

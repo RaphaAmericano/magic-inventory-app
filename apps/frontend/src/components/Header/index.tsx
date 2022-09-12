@@ -17,8 +17,6 @@ export interface IProps {
 }
 
 export function Header(props:IProps) {
-  const { authStore } = useStores()
-  const { auth, user, logout } = authStore;
   const { menu } = props;
   
   return (
@@ -41,10 +39,6 @@ export function Header(props:IProps) {
               </ul> }
             </li>)}
           </ul>
-          { auth && <div>
-            <span className={css.name}>{user?.name}</span>
-            <button onClick={logout}>Logoff</button>
-            </div>}
         </nav>
       </Container>
     </header>

@@ -43,9 +43,7 @@ export function App() {
           </Route>
 
           <Route element={<PrivatePages />}>
-            
             <Route path="/" element={<Home />} />
-            
           </Route>
           
           <Route path="*" element={<Navigate to="/login" />} />
