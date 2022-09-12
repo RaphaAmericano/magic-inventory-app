@@ -32,7 +32,7 @@ export function App() {
 
   return (
     <>
-      <Header menu={menuItems} />
+      {!auth && <Header menu={menuItems} />}
 
       <React.Suspense fallback={null}>
         <Routes>
@@ -52,7 +52,7 @@ export function App() {
         </Routes>
       </React.Suspense>
 
-      <Footer />
+      {!auth && <Footer />}
     </>
   );
 }

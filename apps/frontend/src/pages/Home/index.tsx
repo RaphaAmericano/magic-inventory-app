@@ -1,33 +1,22 @@
 import { Container } from "@components/Container";
-import { Drawer } from "@components/Drawer";
 import { Button } from "@components/Button";
 
 import css from "./style.module.scss";
+import { DrawerContainer } from "@components/DrawerContainer";
 
 function Home() {
-
   return (
-    <Drawer>
-      <Container className={css.container}>
-        <h1 className={css.count} >
-          Drawer teste 
-        </h1>
+    <DrawerContainer>
+        <h1 className={css.count}>DrawerContainer teste</h1>
 
         <div className={css.actions}>
-          <Button theme="primary">
-            Incrementar
-          </Button>
+          <Button theme="primary">Incrementar</Button>
 
-          <Button theme="secondary">
-            Resetar
-          </Button>
+          <Button theme="secondary">Resetar</Button>
 
-          <Button theme="primary">
-            Decrementar
-          </Button>
+          <Button theme="primary">Decrementar</Button>
         </div>
-      </Container>
-    </Drawer>
+    </DrawerContainer>
   );
 }
 
