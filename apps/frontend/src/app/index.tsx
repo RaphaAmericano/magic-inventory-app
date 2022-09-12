@@ -14,13 +14,8 @@ const Login = React.lazy(async () => import("../pages/Login"));
 const Signin = React.lazy(async () => import("../pages/Signin"));
 
 const menu = [
-  { to:"/", text:"Home", private: false },
-  { to:"/about", text:"About", private: false },
   { to:"/login", text:"Login", private: false },
   { to:"/signin", text:"Signin", private: false },
-  { to:"/resumes", text:"Resumos", private: true, submenu: [
-    { to:"/resumes/new", text:"Novo Resumo", private: false },
-  ] },
 ];
 
 

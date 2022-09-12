@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -11,20 +10,17 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import { DrawerHeader } from "./DrawerHeader";
 import { DrawerListItem } from "./DrawerListItem";
 import { DrawerBar } from "./DrawerBar";
 import { Drawer } from "./Drawer";
 import { DrawerUserContent } from "./DrawerUserContent";
-
-// const mockArr = ["Inbox", "Starred", "Send email", "Drafts"];
-const mockArr = [
-  { text: "Inventário", icon: <MailIcon /> },
-  { text: "Coleções", icon: <MailIcon /> },
-  { text: "Wishlist", icon: <InboxIcon /> },
-  { text: "Gráficos", icon: <MailIcon /> },
-  { text: "Sair", icon: <MailIcon /> }
-];
+import { useStores } from "@stores/index";
 
 const drawerWidth = 240;
 
@@ -36,6 +32,9 @@ export function DrawerContainer(props: IProps) {
   const { children } = props;
   const [open, setOpen] = React.useState(false);
 
+  const { authStore } = useStores();
+  const { logout } = authStore;
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -44,9 +43,15 @@ export function DrawerContainer(props: IProps) {
     setOpen(false);
   };
 
+  const menuItems = [
+    { text: "Inventário", icon: <InventoryIcon /> },
+    { text: "Coleções", icon: <ViewListIcon /> },
+    { text: "Wishlist", icon: <StarBorderIcon /> },
+    { text: "Gráficos", icon: <BarChartIcon /> }
+  ];
+
   return (
     <Box sx={{ display: "flex" }}>
-      <CssBaseline />
       <DrawerBar position="fixed" open={open} drawerWidth={drawerWidth}>
         <Toolbar>
           <IconButton
@@ -75,10 +80,12 @@ export function DrawerContainer(props: IProps) {
         </DrawerHeader>
         <Divider />
         <List>
-          {mockArr.map(({ text, icon }, index) => (
+          {menuItems.map(({ text, icon }, index) => (
             <DrawerListItem key={text} text={text} icon={icon} open={open} />
           ))}
         </List>
+        <Divider />
+        <DrawerListItem text={'Sair'} icon={<ExitToAppIcon />} open={open} onClick={logout}/>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
