@@ -1,4 +1,10 @@
+import { Container, Grid, Typography, Button } from "@mui/material";
+import { NewInventoryForm } from "@components/NewInventoryForm";
+
 function NewInventory(){
-    return <div>Inventário</div>   
+    return <>
+            <Typography>Inventário</Typography>
+            <NewInventoryForm />
+        </>     
 }
 export default NewInventory;

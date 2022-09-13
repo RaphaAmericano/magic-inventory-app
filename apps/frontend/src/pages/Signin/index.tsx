@@ -1,5 +1,5 @@
 import { Container, Grid, Typography, Button } from "@mui/material";
-import { SigninForm } from "@components/SIgninForm";
+import { SigninForm } from "@components/SigninForm";
 import { useNavigate } from "react-router-dom";
 
 function Signin(){
