@@ -28,9 +28,23 @@ export class InventorysService {
     }
   }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} inventory`;
-  // }
+  async findById(_id: string) {
+    try {
+      const inventory = await this.inventoryModel.findOne({ _id }).exec();
+      return inventory;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findByUser(id: string) {
+    try {
+      const inventory = await this.inventoryModel.find({ ownerId: id }).exec();
+      return inventory;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // update(id: number, updateInventoryDto: UpdateInventoryDto) {
   //   return `This action updates a #${id} inventory`;

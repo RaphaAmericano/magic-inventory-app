@@ -27,11 +27,15 @@ export class InventorysController {
     return this.inventorysService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.inventorysService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.inventorysService.findById(id);
+  }
 
+  @Get('user/:id')
+  findByUser(@Param('id') id: string) {
+    return this.inventorysService.findByUser(id);
+  }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateInventoryDto: UpdateInventoryDto) {
   //   return this.inventorysService.update(+id, updateInventoryDto);
