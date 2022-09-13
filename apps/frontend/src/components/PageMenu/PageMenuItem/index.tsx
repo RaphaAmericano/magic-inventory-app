@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import css from "../style.module.scss";
+
 export interface IProps {
     text: string;
     to: string;

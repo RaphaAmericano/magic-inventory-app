@@ -14,6 +14,8 @@ const About = React.lazy(async () => import("../pages/About"));
 const Login = React.lazy(async () => import("../pages/Login"));
 const Signin = React.lazy(async () => import("../pages/Signin"));
 const Inventory = React.lazy(async () => import("../pages/Inventory"));
+const NewInventory = React.lazy(async () => import("../pages/Inventory/NewInventory"));
+const ListInventory = React.lazy(async () => import("../pages/Inventory/ListInventory"));
 const Collections = React.lazy(async () => import("../pages/Collections"));
 const Wishlists = React.lazy(async () => import("../pages/Wishlists"));
 const Charts = React.lazy(async () => import("../pages/Charts"));
@@ -43,7 +45,10 @@ export function App() {
 
           <Route element={<PrivatePages />}>
             <Route path="/" element={<Home />} />
-            <Route path="/inventory" element={<Inventory />}/>
+            <Route path="/inventory" element={<Inventory />}>
+              <Route path="new" element={<NewInventory />} />
+              <Route path="list" element={<ListInventory />} />
+            </Route>
             <Route path="/collections" element={<Collections />}/>
             <Route path="/wishlists" element={<Wishlists />}/>
             <Route path="/charts" element={<Charts />}/>
