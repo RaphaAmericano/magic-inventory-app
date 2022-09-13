@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { InventorysModule } from './inventorys/inventorys.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UsersModule } from './users/users.module';
     JwtModule,
     AuthModule,
     UsersModule,
+    InventorysModule,
   ],
   controllers: [],
   providers: [],
