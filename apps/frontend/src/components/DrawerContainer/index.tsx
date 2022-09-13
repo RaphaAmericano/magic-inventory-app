@@ -54,7 +54,7 @@ export function DrawerContainer(props: IProps) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <DrawerBar position="fixed" open={open} drawerWidth={drawerWidth}>
+      <DrawerBar position="fixed" open={open} drawerwidth={drawerWidth}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -73,7 +73,7 @@ export function DrawerContainer(props: IProps) {
           </Typography>
         </Toolbar>
       </DrawerBar>
-      <Drawer variant="permanent" open={open} drawerWidth={drawerWidth}>
+      <Drawer variant="permanent" open={open} drawerwidth={drawerWidth}>
         <DrawerHeader>
           {open && <DrawerUserContent />}
           <IconButton onClick={handleDrawerClose}>

@@ -2,29 +2,53 @@ import { Grid, Button } from "@mui/material";
 import { TextInput } from "@components/TextInput";
 import { useNewInventoryForm } from "./newInventoryFormHook";
 import type { IFields } from "./newInventoryFormHook";
-import { authQueries } from "@hooks/queries";
+import { inventoryQueries } from "@hooks/queries";
+import { useStores } from "@stores/index";
+import { useNavigate } from "react-router-dom";
 
-export function NewInventoryForm(){
-    const newInventoryForm = useNewInventoryForm();
-    const useAuthUser = authQueries.useAuthUser();
+export function NewInventoryForm() {
+  const navigate = useNavigate();
+  const { authStore } = useStores();
+  const { user } = authStore;
 
-    async function onSubmit(data:IFields){
-        console.log(data);
-    };
+  if(!user) return null;
 
-    function onError(error:any){
-        console.log(error);
-    };
+  const { _doc: { _id:ownerId } } = user;
 
-    return  <form onSubmit={newInventoryForm.handleSubmit(onSubmit, onError)}>
-                <Grid container direction="column" spacing={2}>
-                    <Grid item>
-                        <TextInput type="text" label="Nome" name="name" form={newInventoryForm}/>
-                    </Grid>
-                    <Grid item>
-                        <Button variant="outlined" type="submit">Salvar</Button>
-                    </Grid>
-                </Grid>
-            </form>
+  const newInventoryForm = useNewInventoryForm();
 
+  const useCreateInventory = inventoryQueries.useCreateInventory();
+
+  async function onSubmit(data: IFields) {
+    console.log(data);
+    try {
+      const { name } = data;
+      const inventory = await useCreateInventory.mutateAsync({ name, ownerId });
+      if(inventory){
+        newInventoryForm.reset();
+      }
+    } catch (error) {
+      const { status } = error as { message: string; status: number };
+      console.log(status);
+    }
+  }
+
+  function onError(error: any) {
+    console.log(error);
+  }
+
+  return (
+    <form onSubmit={newInventoryForm.handleSubmit(onSubmit, onError)}>
+      <Grid container direction="column" spacing={2}>
+        <Grid item>
+          <TextInput type="text" label="Nome" name="name" form={newInventoryForm} />
+        </Grid>
+        <Grid item>
+          <Button variant="outlined" type="submit">
+            Salvar
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
+  );
 }

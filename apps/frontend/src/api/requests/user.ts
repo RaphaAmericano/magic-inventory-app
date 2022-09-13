@@ -12,6 +12,6 @@ export async function getUsers() {
 }
 
 export async function deleteUser(params: userSchema.UserDeleteParams) {
-    const { id } = params;
+  const { id } = params;
   return service.delete<never>(`/users/${id}`);
 }

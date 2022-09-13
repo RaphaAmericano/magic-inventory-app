@@ -3,7 +3,7 @@ import { NewInventoryForm } from "@components/NewInventoryForm";
 
 function NewInventory(){
     return <>
-            <Typography>Inventário</Typography>
+            <Typography>Novo Inventário</Typography>
             <NewInventoryForm />
         </>     
 }

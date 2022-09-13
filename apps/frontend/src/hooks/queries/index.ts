@@ -1,5 +1,5 @@
 import * as userQueries from "./user";
 import * as authQueries from "./auth";
-import * as resumeQueries from "./resume";
+import * as inventoryQueries from "./inventory";
 
-export { userQueries, authQueries, resumeQueries }
+export { userQueries, authQueries, inventoryQueries }

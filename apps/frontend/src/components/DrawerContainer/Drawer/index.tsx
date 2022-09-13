@@ -4,18 +4,18 @@ import { closedMixin, openedMixin } from "./../mixins";
 
 interface MainDrawerProps extends DrawerProps {
   open?: boolean;
-  drawerWidth: number;
+  drawerwidth: number;
 }
 
 export const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== "open" })<MainDrawerProps>(
-  ({ theme, open, drawerWidth }) => ({
-    width: drawerWidth,
+  ({ theme, open, drawerwidth }) => ({
+    width: drawerwidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
     boxSizing: "border-box",
     ...(open && {
-      ...openedMixin(theme, drawerWidth),
-      "& .MuiDrawer-paper": openedMixin(theme, drawerWidth),
+      ...openedMixin(theme, drawerwidth),
+      "& .MuiDrawer-paper": openedMixin(theme, drawerwidth),
     }),
     ...(!open && {
       ...closedMixin(theme),
