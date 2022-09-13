@@ -36,6 +36,7 @@ export class InventorysController {
   findByUser(@Param('id') id: string) {
     return this.inventorysService.findByUser(id);
   }
+
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateInventoryDto: UpdateInventoryDto) {
   //   return this.inventorysService.update(+id, updateInventoryDto);
