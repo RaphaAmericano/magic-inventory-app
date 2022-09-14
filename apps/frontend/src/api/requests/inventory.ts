@@ -10,3 +10,12 @@ export async function getInventoryByUserId(params: inventorySchema.InventoryGetB
   return service.get<never, inventorySchema.InventoryGetByUserIdResponse>(`/inventorys/user/${ownerId}`);
 }
 
+export async function deleteInventory(params: inventorySchema.InventoryDeleteParams){
+  const { _id } = params;
+  return service.delete<never>(`/inventorys/${_id}`)
+}
+
+export async function patchInventory(params: inventorySchema.InventoryPatchParams){
+  const { _id, ...restParams } = params;
+  return service.patch<never, inventorySchema.InventoryPatchResponse>(`/inventorys/${_id}`, { ...restParams })
+}

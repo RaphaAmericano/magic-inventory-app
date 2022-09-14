@@ -9,3 +9,14 @@ export interface InventoryGetByUserIdParams extends Omit<Inventory, "_id" | "nam
 }
 
 export type InventoryGetByUserIdResponse = Inventory[];
+
+export interface InventoryDeleteParams extends Omit<Inventory,  "name" | "ownerId" > {
+    
+}
+
+export interface InventoryPatchParams extends Inventory{
+    
+}
+export interface InventoryPatchResponse {
+
+}

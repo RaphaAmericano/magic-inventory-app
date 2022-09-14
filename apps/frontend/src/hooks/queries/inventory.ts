@@ -24,3 +24,15 @@ export function useGetInventoryByUserId(params?: inventorySchema.InventoryGetByU
 
   return query;
 }
+
+export function usePatchInventory(){
+  const mutation = useMutation<unknown, unknown, inventorySchema.InventoryPatchParams>(inventoryRequests.patchInventory);
+
+  return mutation;
+}
+
+export function useDeleteInventory(){
+  const mutation = useMutation<unknown, unknown, inventorySchema.InventoryDeleteParams>(inventoryRequests.deleteInventory);
+
+  return mutation;
+}
