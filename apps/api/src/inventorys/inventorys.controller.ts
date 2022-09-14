@@ -10,7 +10,7 @@ import {
 import { InventorysService } from './inventorys.service';
 import { CreateInventoryDto } from './dto/create-inventory.dto';
 import { ApiTags } from '@nestjs/swagger';
-// import { UpdateInventoryDto } from './dto/update-inventory.dto';
+import { UpdateInventoryDto } from './dto/update-inventory.dto';
 
 @ApiTags('inventorys')
 @Controller('inventorys')
@@ -37,13 +37,16 @@ export class InventorysController {
     return this.inventorysService.findByUser(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateInventoryDto: UpdateInventoryDto) {
-  //   return this.inventorysService.update(+id, updateInventoryDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateInventoryDto: UpdateInventoryDto,
+  ) {
+    return this.inventorysService.update(id, updateInventoryDto);
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.inventorysService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.inventorysService.remove(id);
+  }
 }
