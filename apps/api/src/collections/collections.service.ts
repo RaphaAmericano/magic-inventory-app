@@ -59,12 +59,14 @@ export class CollectionsService {
     }
   }
 
-  // async remove(_id: string) {
-  //   try {
-  //     const collection = await this.collectionModel.findByIdAndDelete(_id).exec();
-  //     return collection;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async remove(_id: string) {
+    try {
+      const collection = await this.collectionModel
+        .findByIdAndDelete(_id)
+        .exec();
+      return collection;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { inventorySchema } from "../schemas";
 import service from "../service";
 
-export async function createInventory(params: inventorySchema.InventoryCreateParams) {
+export async function postInventory(params: inventorySchema.InventoryPostParams) {
   return service.post<never>("/inventorys", { ...params });
 }
 

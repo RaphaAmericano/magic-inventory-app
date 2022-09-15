@@ -1,6 +1,6 @@
 import { Inventory } from "entities";
 
-export interface InventoryCreateParams extends Omit<Inventory, "_id"> {
+export interface InventoryPostParams extends Omit<Inventory, "_id"> {
     ownerId: string;
 }
 export interface InventoryGetParams extends Omit<Inventory, "name" |  "ownerId"> {

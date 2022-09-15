@@ -8,6 +8,13 @@ const service = axios.create({
   baseURL: process.env.API_URL
 });
 
+const scryfallService = axios.create({
+  headers: {
+    "Content-Type": "application/json",
+  },
+  baseURL: process.env.SCRYFALL_API_URL
+});
+
 function parseResponse(response: AxiosResponse) {
   return response.data;
 }
@@ -34,6 +41,10 @@ function injectToken(config: AxiosRequestConfig<unknown>){
   return config;
 }
 
+scryfallService.interceptors.response.use(parseResponse, handleResponseError);
+scryfallService.interceptors.request.use(injectToken);
+
 service.interceptors.response.use(parseResponse, handleResponseError);
 service.interceptors.request.use(injectToken);
+export { scryfallService };
 export default service;

@@ -18,12 +18,12 @@ export function NewInventoryForm() {
 
   const newInventoryForm = useNewInventoryForm();
 
-  const useCreateInventory = inventoryQueries.useCreateInventory();
+  const usePostInventory = inventoryQueries.usePostInventory();
 
   async function onSubmit(data: IFields) {
     const { name } = data;
     try {
-      const inventory = await useCreateInventory.mutateAsync({ name, ownerId });
+      const inventory = await usePostInventory.mutateAsync({ name, ownerId });
       if (inventory) {
         newInventoryForm.reset();
         displayFeedback(`Inventário ${name} criado com sucesso.`);
