@@ -9,7 +9,17 @@ export function useCreateInventory() {
   return mutation;
 }
 
-export function useGetInventoryById() {}
+export function useGetInventory(params?: inventorySchema.InventoryGetParams) {
+  async function requestFn(){
+    return inventoryRequests.getInventory(params!)
+  } 
+  const query = useQuery<inventorySchema.InventoryGetResponse>(["get-inventory", params], requestFn, {
+    enabled: Boolean(params),
+    staleTime: 4000,
+  })
+
+  return query;
+}
 
 export function useGetInventoryByUserId(params?: inventorySchema.InventoryGetByUserIdParams) {
   async function requestFn() {

@@ -16,7 +16,7 @@ function ListInventory() {
   } = user;
   const { data, isLoading } = inventoryQueries.useGetInventoryByUserId({ ownerId });
 
-  const useDeleteInventory = inventoryQueries.useDeleteInventory()
+  const useDeleteInventory = inventoryQueries.useDeleteInventory();
 
   const formatedData = data && formatData(data);
 
@@ -29,8 +29,7 @@ function ListInventory() {
   }
 
   function editInventory(_id: string){
-    console.log('edit', _id);
-    navigate(`/${_id}`);
+    navigate(`/inventory/${_id}`)
   }
 
   async function deleteInventory(_id: string){

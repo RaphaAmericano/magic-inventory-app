@@ -28,7 +28,7 @@ export class InventorysController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findById(@Param('id') id: string) {
     return this.inventorysService.findById(id);
   }
 
