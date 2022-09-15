@@ -11,10 +11,10 @@ const defaultValues: IFields = {
 }
 
 const schema = yup.object({
-    name: yup.string().required("Informe o nome do inventário")
-});
+    name: yup.string().required("Informe o nome da coleção")
+})
 
-export function useNewInventoryForm(){
+export function useNewCollectionForm(){
     const { formState, ...rest } = useForm<IFields>({
         defaultValues,
         resolver: yupResolver(schema)

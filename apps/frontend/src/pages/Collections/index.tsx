@@ -3,7 +3,7 @@ import { Container, Grid, Paper, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import css from "./style.module.scss";
 
-function Collections() {
+function Collection() {
   const subMenus = [
     { text: "Coleções", to: "list" },
     { text: "Nova", to: "new" },
@@ -28,4 +28,4 @@ function Collections() {
     </Container>
   );
 }
-export default Collections;
+export default Collection;

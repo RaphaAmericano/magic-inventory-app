@@ -7,7 +7,7 @@ export async function getCollection(params: collectionSchema.CollectionGetParams
 }
 
 export async function postCollection(params: collectionSchema.CollectionPostParams){
-    return service.post<never, collectionSchema.CollectionPostResponse>(`/collecitons`, { ...params })
+    return service.post<never, collectionSchema.CollectionPostResponse>(`/collections`, { ...params })
 } 
 
 export async function deleteCollection(params: collectionSchema.CollectionDeleteParams){
