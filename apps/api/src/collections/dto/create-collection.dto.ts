@@ -1,8 +1,8 @@
-import { Inventory } from 'entities';
+import { Collection } from 'entities';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateInventoryDto implements Omit<Inventory, '_id'> {
+export class CreateCollectionDto implements Omit<Collection, '_id'> {
   @IsNotEmpty()
   @ApiProperty()
   name: string;
