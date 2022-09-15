@@ -4,22 +4,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Inventory } from "entities";
 
 
-export interface IFields extends Inventory {
-    
+export interface IFields  {
+    name: string;
 }
-type IProps = Inventory;
 
-const defaultValues: IFields = {
-    _id: "",
-    ownerId: "",
-    name: ""
-}
+type IProps = IFields;
 
 const schema = yup.object({
     name: yup.string().required("Informe o nome")
 });
 
 export function useEditInventoryForm(props:IProps){
+
     const { formState, ...rest } = useForm<IFields>({
         defaultValues: { ...props },
         resolver: yupResolver(schema)

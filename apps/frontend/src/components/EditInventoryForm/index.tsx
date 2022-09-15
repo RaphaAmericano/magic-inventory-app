@@ -12,10 +12,13 @@ interface IProps {
 }
 
 export function EditInventoryForm(props: IProps) {
-  const { data } = props;
+  const {
+    data: { name, _id },
+  } = props;
   const navigate = useNavigate();
-  const { authStore } = useStores();
+  const { authStore, snackBarStore } = useStores();
   const { user } = authStore;
+  const { displayFeedback } = snackBarStore;
 
   if (!user) return null;
 
@@ -23,20 +26,22 @@ export function EditInventoryForm(props: IProps) {
     _doc: { _id: ownerId },
   } = user;
 
-  const editInventoryForm = useEditInventoryForm(data);
+  const editInventoryForm = useEditInventoryForm({ name });
 
   const usePatchInventory = inventoryQueries.usePatchInventory();
 
   async function onSubmit(data: IFields) {
     try {
-      const { name, _id, ownerId } = data;
+      const { name } = data;
       const inventory = await usePatchInventory.mutateAsync({ _id, name, ownerId });
       if (inventory) {
+        displayFeedback("Update");
         editInventoryForm.reset();
       }
     } catch (error) {
       const { status } = error as { message: string; status: number };
       console.log(status);
+      displayFeedback("Erro", "error");
     }
   }
 

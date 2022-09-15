@@ -1,3 +1,4 @@
+import { AlertColor } from "@mui/material";
 import { useState, useCallback, useEffect } from "react";
 
 export function useSnackBar(){
@@ -5,6 +6,7 @@ export function useSnackBar(){
     const [duration, setDuration] = useState(6000);
     const [autoHide, setAutoHide] = useState(true);
     const [text, setText] = useState("");
+    const [severity, setSeverity] = useState<AlertColor>("success");
 
     const openFn = useCallback(() => {
         setOpen(true);
@@ -14,11 +16,21 @@ export function useSnackBar(){
         setOpen(false);
     },[]);
 
-    // useEffect(() => {
-    //     if(open && autoHide){
-    //         setInterval(() => closeFn(), duration)
-    //     }
-    // }, [open]);
+    function displayFeedback(message: string, severity?: AlertColor ){
+        if(severity) setSeverity(severity);
+        openFn();
+        setText(message);
+    }
 
-    return { open, openFn, closeFn, setDuration, setAutoHide, text, setText }
+    useEffect(() => {
+        if(open && autoHide){
+            setInterval(() => {
+                closeFn(); 
+                setText('');
+                setSeverity('success');
+            }, duration)
+        }
+    }, [open]);
+
+    return { open, openFn, closeFn, setDuration, duration, setAutoHide, text, setText, severity, setSeverity, displayFeedback }
 }

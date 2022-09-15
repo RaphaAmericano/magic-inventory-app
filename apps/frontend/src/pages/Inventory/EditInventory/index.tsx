@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { inventoryQueries } from "@hooks/queries";
 import { useParams } from "react-router-dom";
 import { EditInventoryForm } from "@components/EditInventoryForm";
@@ -12,9 +11,6 @@ function EditInventory() {
   if (!_id) return null;
 
   const { data, isLoading, isFetching } = inventoryQueries.useGetInventory({ _id });
-
-  useEffect(() => { console.log(isLoading) },[isLoading]);
-  useEffect(() => { console.log(isFetching) },[isFetching]);
 
   return (
     <div>

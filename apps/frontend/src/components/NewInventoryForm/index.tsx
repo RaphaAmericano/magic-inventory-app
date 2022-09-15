@@ -7,29 +7,31 @@ import { useStores } from "@stores/index";
 import { useNavigate } from "react-router-dom";
 
 export function NewInventoryForm() {
-  const navigate = useNavigate();
-  const { authStore } = useStores();
+  const { authStore, snackBarStore } = useStores();
   const { user } = authStore;
+  const { displayFeedback } = snackBarStore;
+  if (!user) return null;
 
-  if(!user) return null;
-
-  const { _doc: { _id:ownerId } } = user;
+  const {
+    _doc: { _id: ownerId },
+  } = user;
 
   const newInventoryForm = useNewInventoryForm();
 
   const useCreateInventory = inventoryQueries.useCreateInventory();
 
   async function onSubmit(data: IFields) {
-    console.log(data);
+    const { name } = data;
     try {
-      const { name } = data;
       const inventory = await useCreateInventory.mutateAsync({ name, ownerId });
-      if(inventory){
+      if (inventory) {
         newInventoryForm.reset();
+        displayFeedback(`Inventário ${name} criado com sucesso.`);
       }
     } catch (error) {
       const { status } = error as { message: string; status: number };
       console.log(status);
+      displayFeedback(`Erro ao tentar criar o inventário ${name}.`, "error");
     }
   }
 

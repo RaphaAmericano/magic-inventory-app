@@ -1,11 +1,14 @@
-import { SnackBar } from "@components/SnackBar"
+import { Snackbar, Alert } from "@mui/material";
+// import { SnackBar } from "@components/SnackBar"
 import { useStores } from "@stores/index";
 
-export function SnackBarContainer(){
-    const { snackBarStore } = useStores();
-    const { open, text } = snackBarStore;
+export function SnackBarContainer() {
+  const { snackBarStore } = useStores();
+  const { open, text, duration, severity } = snackBarStore;
 
-    return <>
-    {open && <SnackBar text={text} />}
-    </>
+  return (
+    <Snackbar open={open} autoHideDuration={duration}>
+      <Alert severity={severity}>{text}</Alert>
+    </Snackbar>
+  );
 }
