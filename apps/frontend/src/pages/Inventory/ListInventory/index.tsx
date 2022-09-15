@@ -64,20 +64,16 @@ function ListInventory() {
       isAction: true,
     },
     {
-      key: "deleteInvetory",
+      key: "deleteInventory",
       label: "Apagar",
       isAction: true,
     },
   ];  
 
-
-
-
   return (
-    <div>
-      List
+    <>
       {formatedData && <MainTable data={formatedData} headings={headings} />}
-    </div>
+    </>
   );
 }
 export default ListInventory;

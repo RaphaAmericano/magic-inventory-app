@@ -6,6 +6,11 @@ export async function getCollection(params: collectionSchema.CollectionGetParams
     return service.get<never, collectionSchema.CollectionGetResponse>(`/collections/${_id}`);
 }
 
+export async function getCollectionByUserId(params: collectionSchema.CollectionGetByUserIdParams) {
+    const { ownerId } = params;
+    return service.get<never, collectionSchema.CollectionGetByUserIdResponse>(`/collections/user/${ownerId}`);
+}
+
 export async function postCollection(params: collectionSchema.CollectionPostParams){
     return service.post<never, collectionSchema.CollectionPostResponse>(`/collections`, { ...params })
 } 

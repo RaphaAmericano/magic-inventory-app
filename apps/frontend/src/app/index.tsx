@@ -19,6 +19,8 @@ const ListInventory = React.lazy(async () => import("../pages/Inventory/ListInve
 const EditInventory = React.lazy(async () => import("../pages/Inventory/EditInventory"));
 const Collections = React.lazy(async () => import("../pages/Collections"));
 const NewCollection = React.lazy(async () => import("../pages/Collections/NewCollection"));
+const ListCollection = React.lazy(async () => import("../pages/Collections/ListCollection"));
+const EditCollection = React.lazy(async () => import("../pages/Collections/EditCollection"));
 
 const Wishlists = React.lazy(async () => import("../pages/Wishlists"));
 const Charts = React.lazy(async () => import("../pages/Charts"));
@@ -55,6 +57,8 @@ export function App() {
             </Route>
             <Route path="/collections" element={<Collections />}>
               <Route path="new" element={<NewCollection />}/>
+              <Route path="list" element={<ListCollection />}/>
+              <Route path=":id" element={<EditCollection />}/>
             </Route>
             <Route path="/wishlists" element={<Wishlists />}/>
             <Route path="/charts" element={<Charts />}/>

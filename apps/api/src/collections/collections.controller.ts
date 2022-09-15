@@ -32,6 +32,11 @@ export class CollectionsController {
     return this.collectionsService.findById(id);
   }
 
+  @Get('user/:id')
+  findByUser(@Param('id') id: string) {
+    return this.collectionsService.findByUser(id);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

@@ -38,14 +38,16 @@ export class CollectionsService {
     }
   }
 
-  // async findByUser(id: string) {
-  //   try {
-  //     const collection = await this.collectionModel.find({ ownerId: id }).exec();
-  //     return collection;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+  async findByUser(id: string) {
+    try {
+      const collection = await this.collectionModel
+        .find({ ownerId: id })
+        .exec();
+      return collection;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   async update(_id: string, updateCollectionDto: UpdateCollectionDto) {
     try {
