@@ -15,7 +15,7 @@ export function useGetCollection(params?: collectionSchema.CollectionGetParams){
     }
     const query = useQuery<collectionSchema.CollectionGetResponse>(["get-collection", params], requestFn, {
         enabled: Boolean(params),
-        staleTime: 400
+        staleTime: 4000
     });
 
     return query;

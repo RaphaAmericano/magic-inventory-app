@@ -16,11 +16,8 @@ function ListCollection() {
   } = user;
 
   const { data, isLoading } = collectionQueries.useGetCollectionByUserId({ ownerId });
-  console.log(data);
 
-  
   const useDeleteCollection = collectionQueries.useDeleteCollection();
-
   const formatedData = data && formatData(data);
 
   function formatData(data: Collection[]) {

@@ -4,6 +4,7 @@ interface IHeadingsProps {
   key: string;
   label: string;
   isAction: boolean;
+  isImage?: boolean;
 }
 
 interface IProps {
@@ -31,13 +32,13 @@ export function MainTable(props: IProps) {
   function renderBodyRows(data: any[]) {
     return data.map(item => (
       <TableRow key={JSON.stringify(item)}>
-        {headings.map(({ key, label, isAction}) =>
+        {headings.map(({ key, label, isAction, isImage }) =>
           isAction ? (
             <TableCell key={key}>
-              <Button onClick={item[key]}>{label}</Button>
+              <Button onClick={item[key]}>{isImage ? <img src={label}/> :  label}</Button>
             </TableCell>
             ) : (
-            <TableCell key={item[key]}>{item[key]}</TableCell>
+            <TableCell key={item[key]}>{isImage ? <img src={item[key]}/> : item[key]}</TableCell>
           ),
         )}
       </TableRow>
