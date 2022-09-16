@@ -4,4 +4,6 @@ import * as resumeSchema from "./resume";
 import * as inventorySchema from "./inventory";
 import * as collectionSchema from "./collection";
 import * as cardSchema from "./card";
-export { userSchema, authSchema, resumeSchema, inventorySchema, collectionSchema, cardSchema }
+import * as setSchema from "./set";
+
+export { userSchema, authSchema, resumeSchema, inventorySchema, collectionSchema, cardSchema, setSchema };
