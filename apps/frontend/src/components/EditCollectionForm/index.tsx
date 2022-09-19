@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { Grid, Button, CircularProgress } from "@mui/material";
+import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { Grid, Button, CircularProgress, TableContainer, Table, TableBody } from "@mui/material";
 import { TextInput } from "@components/TextInput";
 import { useEditCollectionForm } from "./editCollectionFormHook";
 import type { IFields } from "./editCollectionFormHook";
@@ -8,10 +8,9 @@ import { useStores } from "@stores/index";
 import { useNavigate } from "react-router-dom";
 import { Collection } from "entities";
 import { SearchInput } from "@components/SearchInput";
-import { Subject, debounceTime, distinctUntilChanged } from "rxjs";
 import { useDebouce } from "@hooks/helpers/debouce";
-import { MainTable } from "@components/MainTable";
 import { CardsTable } from "@pages/Collections/CardsTable";
+import { EditItemField } from "./EditItemField";
 
 interface IProps {
   data: Collection;
@@ -32,16 +31,24 @@ export function EditCollectionForm(props: IProps) {
     _doc: { _id: ownerId },
   } = user;
 
+  // const searchInputRef = useRef<HTMLInputElement>();
   const [query, setQuery] = useState("");
   const searchQuery = useDebouce(query, 400);
 
-  useEffect(() => { 
-    console.log(searchQuery) 
-  },[searchQuery]);
+  const { data, isLoading } = cardQueries.useGetCardSearch({ q: searchQuery });
 
-  const { data, isLoading } = cardQueries.useGetCardSearch({ q: searchQuery});
+  const editCollectionForm = useEditCollectionForm();
+  const watchShowCards = editCollectionForm.watch("cards", []);
 
-  const editCollectionForm = useEditCollectionForm({ name });
+  useEffect(() => {
+    editCollectionForm.setValue("name", name);
+  }, []);
+
+  useEffect(() => {
+    const subscription = editCollectionForm.watch((value, { name, type }) => console.log(value, name, type));
+    return () => subscription.unsubscribe();
+  }, [editCollectionForm.watch]);
+
   const usePatchCollection = collectionQueries.usePatchCollection();
 
   async function onSubmit(data: IFields) {
@@ -70,6 +77,42 @@ export function EditCollectionForm(props: IProps) {
     setQuery(value);
   }
 
+  function cleanSearchQuery() {
+    // if (searchInputRef.current) {
+    setQuery("");
+    // searchInputRef.current.value = "";
+    // }
+  }
+
+  function findCard(id: string) {
+    return editCollectionForm.getValues("cards").find(value => value.id === id);
+  }
+
+  function setCardsQuantity(id: string, quantity: number) {
+    const cards = editCollectionForm.getValues("cards");
+    const index = cards.map(card => card.id).indexOf(id);
+    cards[index] = { ...cards[index], quantity };
+    editCollectionForm.replace(cards);
+  }
+
+  function add(id: string) {
+    const card = findCard(id);
+    if (card) {
+      setCardsQuantity(card.id, card.quantity + 1);
+    } else {
+      editCollectionForm.append({ id, quantity: 1 });
+    }
+  }
+
+  function remove(id: string) {
+    const card = findCard(id);
+    if (card) {
+      if(card.quantity > 0){
+        setCardsQuantity(card.id, card.quantity - 1);
+      }
+    } 
+  }
+
   return (
     <form onSubmit={editCollectionForm.handleSubmit(onSubmit, onError)}>
       <Grid container direction="column" spacing={2}>
@@ -79,14 +122,33 @@ export function EditCollectionForm(props: IProps) {
         <Grid item>
           <SearchInput label="Buscar" name="q" onChange={search} />
         </Grid>
-        <Grid>
-          {data && <CardsTable data={data.data}/>}
-        </Grid>
-        <Grid item>
+        {watchShowCards.length > 0 && (
+          <Grid item>
+            <TableContainer>
+              <Table>
+                <TableBody>
+                  {watchShowCards.map(value => (
+                    <EditItemField
+                      key={value.id}
+                      {...value}
+                      removeFn={() => remove(value.id)}
+                      addFn={() => add(value.id)}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
+        )}
+        <Grid item spacing={2}>
           <Button variant="outlined" type="submit">
             Salvar
           </Button>
+          <Button variant="contained" onClick={cleanSearchQuery}>
+            Limpar
+          </Button>
         </Grid>
+        <Grid>{data && <CardsTable data={data.data} addFn={add} />}</Grid>
       </Grid>
     </form>
   );

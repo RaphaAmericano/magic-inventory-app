@@ -1,23 +1,30 @@
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
-export interface IFields  {
-    name: string;
+export interface IFields {
+  name: string;
+  cards: { id: string, quantity: number}[]
 }
 
 type IProps = IFields;
 
 const schema = yup.object({
-    name: yup.string().required("Informe o nome")
+  name: yup.string().required("Informe o nome"),
+  cards: yup.array().of(
+    yup.object().shape({
+      id: yup.string(),
+      quantity: yup.number().min(0),
+    }),
+  ),
 });
 
-export function useEditCollectionForm(props:IProps){
+export function useEditCollectionForm() {
+  const { control, formState, ...rest } = useForm<IFields>({
+    // defaultValues: { ...props },
+    resolver: yupResolver(schema),
+  });
 
-    const { formState, ...rest } = useForm<IFields>({
-        defaultValues: { ...props },
-        resolver: yupResolver(schema)
-    });
-    return { errors: formState.errors, touchedFields: formState.touchedFields, ...rest }
+  const { fields, append, remove, replace } = useFieldArray({ name:"cards", control });
+  return { errors: formState.errors, touchedFields: formState.touchedFields, fields, append, remove, replace, ...rest };
 }

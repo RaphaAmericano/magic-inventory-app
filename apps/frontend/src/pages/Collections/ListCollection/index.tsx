@@ -27,6 +27,7 @@ function ListCollection() {
       deleteCollection: () => deleteCollection(item._id),
     }));
   }
+  
   function editCollection(_id: string) {
     navigate(`/collections/${_id}`);
   }
@@ -35,7 +36,7 @@ function ListCollection() {
     console.log("delete", _id);
     try {
       const collection = await useDeleteCollection.mutateAsync({ _id });
-      console.log(collection);
+      // console.log(collection);
     } catch (error) {
       console.log(error);
     }

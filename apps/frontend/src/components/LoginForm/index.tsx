@@ -9,7 +9,6 @@ export function LoginForm(){
     const useAuthUser = authQueries.useAuthUser();
 
     async function onSubmit(data:IFields){
-        console.log(data)
         try {
             const { email, password } = data;
             const user = await useAuthUser.mutateAsync({ email, password });

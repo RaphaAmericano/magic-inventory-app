@@ -11,7 +11,7 @@ function EditCollection() {
   if (!_id) return null;
 
   const { data, isLoading, isFetching } = collectionQueries.useGetCollection({ _id });
-  // console.log(data);
+  
   return (
     <div>
       Edit {_id}

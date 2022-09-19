@@ -36,7 +36,7 @@ function ListInventory() {
     console.log('delete', _id);
     try {
       const inventory = await useDeleteInventory.mutateAsync({ _id });
-      console.log(inventory);
+      // console.log(inventory);
     } catch (error) {
       console.log(error);
     }

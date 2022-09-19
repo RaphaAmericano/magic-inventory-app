@@ -1,13 +1,14 @@
 import { Card } from "entities";
 import { MainTable } from "@components/MainTable";
-import { colors } from "@mui/material";
+import { setQueries } from "@hooks/queries";
 
 interface IProps {
     data:Card[];
+    addFn:(value:string) => void;
 }
 export function CardsTable(props:IProps){
-    const { data } = props;
-    console.log(data);
+    const { data, addFn } = props;
+    const { data:sets } = setQueries.useGetSets();
 
     const headings = [
         {
@@ -35,12 +36,20 @@ export function CardsTable(props:IProps){
             label: "Image",
             isAction: false,
             isImage: true
+        },
+        {
+            key: "add",
+            label: "Adicionar",
+            isAction: true,
         }
     ];
     
+    function getSetName(value: string){
+        return sets?.find((set) => set.code === value)?.name
+    }
 
     function formatData(data:Card[]){
-        return data.map(({ name, set, colors, cmc, image_uris: { small } }) => ({ name, set, colors:colors.join(" "), cmc, image: small }));
+        return data.map(({ name, set, colors, cmc, image_uris: { small }, id }) => ({ name, set:getSetName(set), colors:colors.join(" "), cmc, image: small, add: () => addFn(id) }));
     }
 
     const formatedData = formatData(data);
