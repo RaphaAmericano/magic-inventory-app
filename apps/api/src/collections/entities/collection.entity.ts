@@ -12,6 +12,9 @@ export class Collection
 
   @Prop()
   name: string;
+
+  @Prop()
+  cards: { id: string; quantity: number }[];
 }
 
 export const CollectionSchema = SchemaFactory.createForClass(Collection);

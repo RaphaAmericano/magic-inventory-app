@@ -10,4 +10,7 @@ export class CreateCollectionDto implements Omit<Collection, '_id'> {
   @IsNotEmpty()
   @ApiProperty()
   ownerId: string;
+
+  @ApiProperty()
+  cards: { id: string; quantity: number }[];
 }
