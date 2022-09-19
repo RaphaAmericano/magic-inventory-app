@@ -25,6 +25,6 @@ export function useEditCollectionForm() {
     resolver: yupResolver(schema),
   });
 
-  const { fields, append, remove, replace } = useFieldArray({ name:"cards", control });
-  return { errors: formState.errors, touchedFields: formState.touchedFields, fields, append, remove, replace, ...rest };
+  const { fields, append, remove, replace, update } = useFieldArray({ name:"cards", control });
+  return { errors: formState.errors, touchedFields: formState.touchedFields, fields, append, remove, replace, update, ...rest };
 }

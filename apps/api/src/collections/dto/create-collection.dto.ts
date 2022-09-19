@@ -1,4 +1,4 @@
-import { Collection } from 'entities';
+import { Collection, CardResume } from 'entities';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -12,5 +12,5 @@ export class CreateCollectionDto implements Omit<Collection, '_id'> {
   ownerId: string;
 
   @ApiProperty()
-  cards: { id: string; quantity: number }[];
+  cards: CardResume[];
 }

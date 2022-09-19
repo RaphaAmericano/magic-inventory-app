@@ -53,8 +53,8 @@ export function EditCollectionForm(props: IProps) {
 
   async function onSubmit(data: IFields) {
     try {
-      const { name } = data;
-      const collection = await usePatchCollection.mutateAsync({ _id, name, ownerId });
+      const { name, cards } = data;
+      const collection = await usePatchCollection.mutateAsync({ _id, name, ownerId, cards });
       if (collection) {
         displayFeedback("Update");
         editCollectionForm.reset();

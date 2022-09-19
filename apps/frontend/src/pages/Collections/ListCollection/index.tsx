@@ -1,7 +1,7 @@
 import { MainTable } from "@components/MainTable";
 import { collectionQueries } from "@hooks/queries";
 import { useStores } from "@stores/index";
-import { Collection } from "entities";
+import { CardResume, Collection } from "entities";
 import { useNavigate } from "react-router-dom";
 
 function ListCollection() {
@@ -23,11 +23,16 @@ function ListCollection() {
   function formatData(data: Collection[]) {
     return data.map(item => ({
       ...item,
+      quantity: sumQuantity(item.cards),
       editCollection: () => editCollection(item._id),
       deleteCollection: () => deleteCollection(item._id),
     }));
   }
-  
+
+  function sumQuantity(cards:CardResume[]){
+    return cards.reduce((acc, value) =>  acc + value.quantity, 0);
+  }
+
   function editCollection(_id: string) {
     navigate(`/collections/${_id}`);
   }
@@ -51,6 +56,11 @@ function ListCollection() {
     {
       key: "name",
       label: "Nome",
+      isAction: false,
+    },
+    {
+      key: "quantity",
+      label: "Quantidade",
       isAction: false,
     },
     {
