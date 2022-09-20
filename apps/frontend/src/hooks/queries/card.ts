@@ -8,7 +8,7 @@ export function useGetCard(params?: cardSchema.CardGetParams){
     }
     const query = useQuery<cardSchema.CardGetResponse>(["get-card", params], requestFn, {
         enabled: Boolean(params),
-        staleTime: 4000
+        staleTime: 4000,
     });
 
     return query;
@@ -20,7 +20,10 @@ export function useGetCardSearch(params?: cardSchema.CardGetSearchParams){
     }
     const query = useQuery<cardSchema.CardGetSearchResponse>(["get-card-search", params], requestFn, {
         enabled: Boolean(params),
-        staleTime: 4000
+        staleTime: 4000,
+        onSuccess: (data) => {
+            console.log(data);
+        }
     });
 
     return query;

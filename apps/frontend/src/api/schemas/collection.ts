@@ -8,9 +8,7 @@ export type CollectionGetByUserIdResponse = Collection[];
 
 export interface CollectionPostParams extends Omit<Collection, "_id" | "cards"> {}
 export interface CollectionPostResponse {}
-export interface CollectionPatchParams extends Collection {
-    cards: {id: string; quantity: number }[]
-}
+export interface CollectionPatchParams extends Collection {}
 export interface CollectionPatchResponse {}
 export interface CollectionDeleteParams extends Omit<Collection, "name" | "ownerId" | "cards"> {}
 export interface CollectionDeleteResponse {}

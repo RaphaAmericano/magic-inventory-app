@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "react-query";
 import { collectionSchema } from "../../api/schemas";
 import { collectionRequests } from "../../api/requests";
 
+
 export function usePostCollection(){
     const mutation = useMutation<unknown, unknown, collectionSchema.CollectionPostParams>(
         collectionRequests.postCollection
@@ -36,7 +37,7 @@ export function useGetCollectionByUserId(params?: collectionSchema.CollectionGet
 }
 
 export function usePatchCollection(){
-    const mutation = useMutation<unknown, unknown, collectionSchema.CollectionPatchParams>(collectionRequests.patchCollection);
+    const mutation = useMutation<unknown, unknown, collectionSchema.CollectionPatchParams>(collectionRequests.patchCollection );
 
     return mutation;
 }

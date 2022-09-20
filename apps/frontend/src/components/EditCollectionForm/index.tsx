@@ -5,7 +5,6 @@ import { useEditCollectionForm } from "./editCollectionFormHook";
 import type { IFields } from "./editCollectionFormHook";
 import { cardQueries, collectionQueries } from "@hooks/queries";
 import { useStores } from "@stores/index";
-import { useNavigate } from "react-router-dom";
 import { Collection } from "entities";
 import { SearchInput } from "@components/SearchInput";
 import { useDebouce } from "@hooks/helpers/debouce";
@@ -18,30 +17,37 @@ interface IProps {
 
 export function EditCollectionForm(props: IProps) {
   const {
-    data: { name, _id },
+    data: { name, _id, cards },
   } = props;
 
-  const { authStore, snackBarStore } = useStores();
+  const { authStore, snackBarStore, cardStore } = useStores();
   const { user } = authStore;
   const { displayFeedback } = snackBarStore;
-
+  const { updateCache } = cardStore;
   if (!user) return null;
 
   const {
     _doc: { _id: ownerId },
   } = user;
 
-  // const searchInputRef = useRef<HTMLInputElement>();
+  
   const [query, setQuery] = useState("");
   const searchQuery = useDebouce(query, 400);
 
-  const { data, isLoading } = cardQueries.useGetCardSearch({ q: searchQuery });
+  const { data, isLoading  } = cardQueries.useGetCardSearch({ q: searchQuery });
+
+  useEffect(() => {
+    if(data){
+      updateCache(data.data)
+    }
+  },[isLoading])
 
   const editCollectionForm = useEditCollectionForm();
   const watchShowCards = editCollectionForm.watch("cards", []);
 
   useEffect(() => {
     editCollectionForm.setValue("name", name);
+    editCollectionForm.setValue("cards", cards);
   }, []);
 
   useEffect(() => {
@@ -54,10 +60,11 @@ export function EditCollectionForm(props: IProps) {
   async function onSubmit(data: IFields) {
     try {
       const { name, cards } = data;
+      console.log(cards);
       const collection = await usePatchCollection.mutateAsync({ _id, name, ownerId, cards });
       if (collection) {
         displayFeedback("Update");
-        editCollectionForm.reset();
+        // editCollectionForm.reset();
       }
     } catch (error) {
       const { status } = error as { message: string; status: number };

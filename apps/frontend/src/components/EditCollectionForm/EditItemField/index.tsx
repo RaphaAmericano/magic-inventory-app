@@ -7,7 +7,9 @@ interface IProps {
   addFn: () => void;
   removeFn: () => void;
 }
+
 export function EditItemField(props: IProps) {
+
   const { id, quantity, addFn, removeFn } = props;
   // const { data:search } = cardQueries.useGetCardSearch();
   // console.log(search);
