@@ -24,9 +24,14 @@ function ListCollection() {
     return data.map(item => ({
       ...item,
       quantity: sumQuantity(item.cards),
+      spoilerCollection: () => viewCollection(item._id),
       editCollection: () => editCollection(item._id),
       deleteCollection: () => deleteCollection(item._id),
     }));
+  }
+
+  function viewCollection(_id: string) {
+    navigate(`/collections/${_id}/view`);
   }
 
   function sumQuantity(cards:CardResume[]){
@@ -62,6 +67,11 @@ function ListCollection() {
       key: "quantity",
       label: "Quantidade",
       isAction: false,
+    },
+    {
+      key: "spoilerCollection",
+      label: "Visualizar",
+      isAction: true,
     },
     {
       key: "editCollection",

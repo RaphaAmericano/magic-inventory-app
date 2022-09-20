@@ -1,12 +1,10 @@
 import { Grid, Typography } from "@mui/material";
-import { collectionQueries } from "@hooks/queries";
 import { useParams } from "react-router-dom";
-import { EditCollectionForm } from "@components/EditCollectionForm";
-
+import { collectionQueries } from "@hooks/queries";
 type IParams = {
   id: string;
 };
-function EditCollection() {
+function ViewCollection() {
   const { id: _id } = useParams<IParams>();
 
   if (!_id) return null;
@@ -15,9 +13,9 @@ function EditCollection() {
 
   return (
     <Grid container spacing={2} direction="column" p={2}>
-      <Typography variant="h6">{data?.name}</Typography>
-      {data && <EditCollectionForm data={data} />}
+      <Typography variant="h4" sx={{ textAlign: "center"}}>{data?.name}</Typography>
+      {/* {data && <EditCollectionForm data={data} />} */}
     </Grid>
   );
 }
-export default EditCollection;
+export default ViewCollection;

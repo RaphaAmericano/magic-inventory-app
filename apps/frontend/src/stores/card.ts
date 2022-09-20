@@ -12,9 +12,9 @@ export function useCard() {
     });
   }
 
-  useEffect(() => {
-    console.log(cache);
-  }, [cache]);
+  function getCacheCard(id: string){
+    return cache.find((card) => card.id === id);
+  }
 
-  return { cache, setCache, updateCache };
+  return { cache, setCache, updateCache, getCacheCard };
 }
