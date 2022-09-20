@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { InventorysModule } from './inventorys/inventorys.module';
 import { CollectionsModule } from './collections/collections.module';
+import { CardsModule } from './cards/cards.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CollectionsModule } from './collections/collections.module';
     UsersModule,
     InventorysModule,
     CollectionsModule,
+    CardsModule,
   ],
   controllers: [],
   providers: [],

@@ -39,7 +39,7 @@ export class InventorysService {
 
   async findByUser(id: string) {
     try {
-      const inventory = await this.inventoryModel.find({ ownerId: id }).exec();
+      const inventory = await this.inventoryModel.find({ owner: id }).exec();
       return inventory;
     } catch (error) {
       throw error;

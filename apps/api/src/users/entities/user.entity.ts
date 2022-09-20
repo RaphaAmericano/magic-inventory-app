@@ -7,7 +7,7 @@ export class User extends Document implements Omit<UserInterface, 'id'> {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Prop()

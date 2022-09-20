@@ -1,6 +1,8 @@
+import { User } from "./user";
+
 export interface Inventory {
     _id: string;
-    ownerId: string;
+    owner: User;
     name: string;
     // collections: any[]
 }
