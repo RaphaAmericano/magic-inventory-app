@@ -20,6 +20,6 @@ import { User, UserSchema } from './entities/user.entity';
   ],
   controllers: [UsersController],
   providers: [UsersService, AuthService, JwtStrategy, LocalStrategy],
-  exports: [UsersService],
+  exports: [UsersService, MongooseModule],
 })
 export class UsersModule {}

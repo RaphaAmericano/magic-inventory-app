@@ -9,5 +9,5 @@ export class CreateInventoryDto implements Omit<Inventory, '_id' | 'owner'> {
 
   @IsNotEmpty()
   @ApiProperty()
-  owner: string;
+  ownerId: string;
 }

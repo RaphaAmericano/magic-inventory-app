@@ -16,6 +16,7 @@ export class AuthService {
   async authUser(email: string, password: string) {
     try {
       const user = await this.usersService.findByEmail(email);
+
       if (!user) throw new NotFoundException('User not found');
 
       const valid = password === user.password;

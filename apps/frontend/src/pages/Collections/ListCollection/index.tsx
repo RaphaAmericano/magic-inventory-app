@@ -14,7 +14,7 @@ function ListCollection() {
   const {
     _doc: { _id: ownerId },
   } = user;
-
+  console.log(ownerId);
   const { data, isLoading } = collectionQueries.useGetCollectionByUserId({ ownerId });
 
   const useDeleteCollection = collectionQueries.useDeleteCollection();

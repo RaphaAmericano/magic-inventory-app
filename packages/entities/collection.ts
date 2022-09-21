@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface CardResume {
   id: string;
   quantity: number;
@@ -5,7 +7,7 @@ export interface CardResume {
 
 export interface Collection {
   _id: string;
-  ownerId: string;
+  owner: User;
   name: string;
   cards: CardResume[];
 }
