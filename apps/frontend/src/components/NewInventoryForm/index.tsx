@@ -2,8 +2,9 @@ import { Grid, Button } from "@mui/material";
 import { TextInput } from "@components/TextInput";
 import { useNewInventoryForm } from "./newInventoryFormHook";
 import type { IFields } from "./newInventoryFormHook";
-import { inventoryQueries } from "@hooks/queries";
+import { inventoryQueries, collectionQueries } from "@hooks/queries";
 import { useStores } from "@stores/index";
+import { useEffect } from "react";
 
 export function NewInventoryForm() {
   const { authStore, snackBarStore } = useStores();
@@ -18,6 +19,12 @@ export function NewInventoryForm() {
   const newInventoryForm = useNewInventoryForm();
 
   const usePostInventory = inventoryQueries.usePostInventory();
+  const { data:collections } = collectionQueries.useGetCollectionByUserId({ ownerId });
+
+  if(!collections) return null;
+  useEffect(() => {
+    console.log(collections)
+  },[collections])
 
   async function onSubmit(data: IFields) {
     const { name } = data;

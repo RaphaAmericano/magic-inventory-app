@@ -2,15 +2,16 @@ import { Collection, CardResume, User } from 'entities';
 import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateCollectionDto implements Omit<Collection, '_id'> {
+export class CreateCollectionDto implements Omit<Collection, '_id' | 'owner'> {
   @IsNotEmpty()
   @IsString()
   @ApiProperty()
   name: string;
 
   @IsNotEmpty()
+  @IsString()
   @ApiProperty()
-  owner: User;
+  ownerId: string;
 
   @ApiProperty()
   cards: CardResume[];

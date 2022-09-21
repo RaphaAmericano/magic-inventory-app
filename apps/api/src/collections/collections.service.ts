@@ -4,16 +4,20 @@ import { Model } from 'mongoose';
 import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { Collection } from './entities/collection.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class CollectionsService {
   constructor(
     @InjectModel(Collection.name) private collectionModel: Model<Collection>,
+    @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
   async create(createCollectionDto: CreateCollectionDto) {
+    const { cards, name, ownerId } = createCollectionDto;
     try {
-      const collection = await new this.collectionModel(createCollectionDto);
+      const owner = await this.userModel.findById(ownerId);
+      const collection = await new this.collectionModel({ name, cards, owner });
       return collection.save();
     } catch (error) {
       throw error;
