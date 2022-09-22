@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Collection as CollectionInterface } from 'entities';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { User, UserSchema } from '../../users/entities/user.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Schema({ versionKey: false })
 export class Collection

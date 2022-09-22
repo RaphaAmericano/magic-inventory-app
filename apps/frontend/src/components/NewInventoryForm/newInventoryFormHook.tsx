@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 export interface IFields {
   name: string;
-  collections: string[];
+  collections: { id: string }[];
 }
 
 const defaultValues: IFields = {
@@ -14,7 +14,11 @@ const defaultValues: IFields = {
 
 const schema = yup.object({
   name: yup.string().required("Informe o nome do inventário"),
-  collections: yup.array().of(yup.string()),
+  collections: yup.array().of(
+    yup.object().shape({
+      id: yup.string(),
+    }),
+  ),
 });
 
 export function useNewInventoryForm() {
@@ -23,10 +27,7 @@ export function useNewInventoryForm() {
     resolver: yupResolver(schema),
   });
 
-  const { fields, append, remove, replace, update } = useFieldArray<IFields, never, "collections">({
-    name: "collections",
-    control,
-  });
+  const { fields, append, remove, replace, update } = useFieldArray({ name: "collections", control });
 
   return {
     errors: formState.errors,

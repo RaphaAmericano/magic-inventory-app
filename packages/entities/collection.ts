@@ -11,3 +11,5 @@ export interface Collection {
   name: string;
   cards: CardResume[];
 }
+
+export type CollectionResume = string[]

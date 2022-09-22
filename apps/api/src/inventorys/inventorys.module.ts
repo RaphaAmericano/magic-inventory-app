@@ -4,6 +4,7 @@ import { InventorysController } from './inventorys.controller';
 import { Inventory, InventorySchema } from './entities/inventory.entity';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from '../users/users.module';
+import { CollectionsModule } from 'src/collections/collections.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UsersModule } from '../users/users.module';
       { name: Inventory.name, schema: InventorySchema },
     ]),
     UsersModule,
+    CollectionsModule,
   ],
   controllers: [InventorysController],
   providers: [InventorysService],

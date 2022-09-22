@@ -14,5 +14,6 @@ import { UsersModule } from '../users/users.module';
   ],
   controllers: [CollectionsController],
   providers: [CollectionsService],
+  exports: [CollectionsService, MongooseModule],
 })
 export class CollectionsModule {}

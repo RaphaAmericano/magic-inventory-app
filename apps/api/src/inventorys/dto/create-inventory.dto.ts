@@ -1,8 +1,10 @@
-import { Inventory } from 'entities';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { CollectionResume, Inventory } from 'entities';
+import { IsNotEmpty, IsArray, ArrayMinSize } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateInventoryDto implements Omit<Inventory, '_id' | 'owner'> {
+export class CreateInventoryDto
+  implements Omit<Inventory, '_id' | 'owner' | 'collections'>
+{
   @IsNotEmpty()
   @ApiProperty()
   name: string;
@@ -10,4 +12,9 @@ export class CreateInventoryDto implements Omit<Inventory, '_id' | 'owner'> {
   @IsNotEmpty()
   @ApiProperty()
   ownerId: string;
+
+  @IsArray()
+  @ArrayMinSize(0)
+  @ApiProperty()
+  collections: CollectionResume[];
 }

@@ -33,7 +33,7 @@ export function EditInventoryForm(props: IProps) {
   async function onSubmit(data: IFields) {
     try {
       const { name } = data;
-      const inventory = await usePatchInventory.mutateAsync({ _id, name, ownerId });
+      const inventory = await usePatchInventory.mutateAsync({ _id, name });
       if (inventory) {
         displayFeedback("Update");
         editInventoryForm.reset();
