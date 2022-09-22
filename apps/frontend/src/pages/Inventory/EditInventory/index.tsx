@@ -1,3 +1,4 @@
+import { Grid, Typography } from "@mui/material";
 import { inventoryQueries } from "@hooks/queries";
 import { useParams } from "react-router-dom";
 import { EditInventoryForm } from "@components/EditInventoryForm";
@@ -13,11 +14,10 @@ function EditInventory() {
   const { data, isLoading, isFetching } = inventoryQueries.useGetInventory({ _id });
 
   return (
-    <div>
-      Edit {_id}
-      <div>{data?.name}</div>
+    <Grid container direction="column" p={2}>
+      <Typography variant="h6">{data?.name}</Typography>
       {data && <EditInventoryForm data={data} />}
-    </div>
+    </Grid>
   );
 }
 export default EditInventory;

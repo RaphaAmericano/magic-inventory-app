@@ -53,11 +53,11 @@ function ListCollection() {
   }
 
   const headings = [
-    {
-      key: "_id",
-      label: "ID",
-      isAction: false,
-    },
+    // {
+    //   key: "_id",
+    //   label: "ID",
+    //   isAction: false,
+    // },
     {
       key: "name",
       label: "Nome",
