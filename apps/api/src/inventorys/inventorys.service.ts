@@ -24,7 +24,7 @@ export class InventorysService {
         .where('_id')
         .in(collectionsIds)
         .exec();
-      console.log(collections);
+
       const inventory = await new this.inventoryModel({
         name,
         owner,
@@ -57,7 +57,10 @@ export class InventorysService {
   async findByUser(id: string) {
     try {
       const owner = await this.userModel.findById(id);
-      const inventory = await this.inventoryModel.find({ owner }).exec();
+      const inventory = await this.inventoryModel
+        .find({ owner })
+        .populate('collections')
+        .exec();
       return inventory;
     } catch (error) {
       throw error;

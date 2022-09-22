@@ -12,7 +12,7 @@ function ListInventory() {
   if (!user) return null;
 
   const {
-    _doc: { _id: ownerId },
+    _doc: { _id: ownerId, name },
   } = user;
   const { data, isLoading } = inventoryQueries.useGetInventoryByUserId({ ownerId });
 
@@ -23,6 +23,8 @@ function ListInventory() {
   function formatData(data: Inventory[]){
     return data.map((item) => ({
       ...item,
+      owner: name,
+      collections: item.collections.map(({ name }) => name  ).join('\n'),
       editInventory:() => editInventory(item._id),
       deleteInvetory:() => deleteInventory(item._id)
     }));
@@ -54,8 +56,13 @@ function ListInventory() {
       isAction: false,
     },
     {
-      key: "ownerId",
+      key: "owner",
       label: "Dono",
+      isAction: false,
+    },
+    {
+      key: "collections",
+      label: "Coleções",
       isAction: false,
     },
     {
