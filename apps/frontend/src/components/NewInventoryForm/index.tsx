@@ -65,7 +65,7 @@ export function NewInventoryForm() {
   async function onSubmit(data: IFields) {
     const { name, collections: selectedCollections } = data;
     const collections = selectedCollections.map(({ id }) => id);
-
+    
     try {
       const inventory = await usePostInventory.mutateAsync({ name, ownerId, collections });
       if (inventory) {

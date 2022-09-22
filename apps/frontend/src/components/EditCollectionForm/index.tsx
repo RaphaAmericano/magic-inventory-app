@@ -29,7 +29,6 @@ export function EditCollectionForm(props: IProps) {
   const {
     _doc: { _id: ownerId },
   } = user;
-
   
   const [query, setQuery] = useState("");
   const searchQuery = useDebouce(query, 400);
@@ -50,17 +49,16 @@ export function EditCollectionForm(props: IProps) {
     editCollectionForm.setValue("cards", cards);
   }, []);
 
-  useEffect(() => {
-    const subscription = editCollectionForm.watch((value, { name, type }) => console.log(value, name, type));
-    return () => subscription.unsubscribe();
-  }, [editCollectionForm.watch]);
+  // useEffect(() => {
+  //   const subscription = editCollectionForm.watch((value, { name, type }) => console.log(value, name, type));
+  //   return () => subscription.unsubscribe();
+  // }, [editCollectionForm.watch]);
 
   const usePatchCollection = collectionQueries.usePatchCollection();
 
   async function onSubmit(data: IFields) {
     try {
       const { name, cards } = data;
-      console.log(cards);
       const collection = await usePatchCollection.mutateAsync({ _id, name, ownerId, cards });
       if (collection) {
         displayFeedback("Update");

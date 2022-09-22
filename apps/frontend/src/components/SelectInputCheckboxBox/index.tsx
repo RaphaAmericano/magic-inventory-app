@@ -20,10 +20,14 @@ function SelectInputCheckboxBoxComp(props: IProps, ref: ForwardedRef<HTMLSelectE
   const [value, setValue] = useState("")
   
   useEffect(() => {
+    console.log(selectedValues)
     setValue(selectedValues.join(", "))
-  },[selectedValues.length])
+  },[selectedValues.length]);
+  
+  useEffect(() => {
+    console.log(value);
+  },[value]);
 
-  console.log(data);
   return (
     <>
       {label && <InputLabel id={label && `id-select-${key}-label`}>{label}</InputLabel>}

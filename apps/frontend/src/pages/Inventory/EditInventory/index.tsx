@@ -12,7 +12,7 @@ function EditInventory() {
   if (!_id) return null;
 
   const { data, isLoading, isFetching } = inventoryQueries.useGetInventory({ _id });
-
+  
   return (
     <Grid container direction="column" p={2}>
       <Typography variant="h6">{data?.name}</Typography>

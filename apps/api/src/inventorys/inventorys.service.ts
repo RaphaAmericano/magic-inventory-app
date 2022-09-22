@@ -15,15 +15,10 @@ export class InventorysService {
   ) {}
 
   async create(createInventoryDto: CreateInventoryDto) {
-    const { ownerId, name, collections: collectionsIds } = createInventoryDto;
+    const { ownerId, name, collections } = createInventoryDto;
 
     try {
       const owner = await this.userModel.findById(ownerId);
-      const collections = await this.collectionModel
-        .find()
-        .where('_id')
-        .in(collectionsIds)
-        .exec();
 
       const inventory = await new this.inventoryModel({
         name,
@@ -47,7 +42,10 @@ export class InventorysService {
 
   async findById(_id: string) {
     try {
-      const inventory = await this.inventoryModel.findOne({ _id }).exec();
+      const inventory = await this.inventoryModel
+        .findOne({ _id })
+        .populate('collections')
+        .exec();
       return inventory;
     } catch (error) {
       throw error;
