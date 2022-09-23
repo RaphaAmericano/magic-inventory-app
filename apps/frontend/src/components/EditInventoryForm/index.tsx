@@ -37,17 +37,16 @@ export function EditInventoryForm(props: IProps) {
   });
 
   useEffect(() => {
-    console.log(ownerCollections);
     editInventoryForm.setValue(
       "collections",
       ownerCollections.map(({ _id }) => ({ id: _id })),
     );
   }, []);
 
-  // useEffect(() => {
-  //   const sub = editInventoryForm.watch((name, prop) => console.log(name, prop));
-  //   return () => sub.unsubscribe();
-  // }, [editInventoryForm.watch]);
+  useEffect(() => {
+    const sub = editInventoryForm.watch((name, prop) => console.log(name, prop));
+    return () => sub.unsubscribe();
+  }, [editInventoryForm.watch]);
 
   function handleChange(event: SelectChangeEvent) {
     const {
@@ -75,9 +74,16 @@ export function EditInventoryForm(props: IProps) {
   }
 
   async function onSubmit(data: IFields) {
+    const { name, collections: selectedCollections } = data;
+    console.log(selectedCollections);
+    const collections = selectedCollections.map(({ id }) => id);
+
     try {
-      const { name } = data;
-      const inventory = await usePatchInventory.mutateAsync({ _id, name });
+      const inventory = await usePatchInventory.mutateAsync({
+        _id,
+        name,
+        collections
+      });
       if (inventory) {
         displayFeedback("Update");
         editInventoryForm.reset();

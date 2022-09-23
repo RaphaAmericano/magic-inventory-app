@@ -15,14 +15,13 @@ interface IProps {
 export function MainTable(props: IProps) {
   const { data, headings } = props;
 
-  const dataLabels: string[] = headings.map(heading => heading.label);
-
-  function renderHead() {
+  function renderHead(headings: IHeadingsProps[]) {
+    const dataLabels = headings.map(heading => heading.label);
     return (
       <TableHead>
         <TableRow>
           {dataLabels.map(label => (
-            <TableCell key={label}>{label}</TableCell>
+            <TableCell key={label.toLowerCase()}>{label}</TableCell>
           ))}
         </TableRow>
       </TableHead>
@@ -35,10 +34,10 @@ export function MainTable(props: IProps) {
         {headings.map(({ key, label, isAction, isImage }) =>
           isAction ? (
             <TableCell key={key}>
-              <Button onClick={item[key]}>{isImage ? <img src={label}/> :  label}</Button>
+              <Button onClick={item[key]}>{isImage ? <img src={label} /> : label}</Button>
             </TableCell>
-            ) : (
-            <TableCell key={item[key]}>{isImage ? <img src={item[key]}/> : item[key]}</TableCell>
+          ) : (
+            <TableCell key={item[key]}>{isImage ? <img src={item[key]} /> : item[key]}</TableCell>
           ),
         )}
       </TableRow>
@@ -48,7 +47,7 @@ export function MainTable(props: IProps) {
   return (
     <TableContainer>
       <Table>
-        {renderHead()}
+        {renderHead(headings)}
         <TableBody>{renderBodyRows(data)}</TableBody>
       </Table>
     </TableContainer>

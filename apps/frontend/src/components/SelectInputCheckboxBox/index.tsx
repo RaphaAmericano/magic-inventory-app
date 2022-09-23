@@ -20,13 +20,8 @@ function SelectInputCheckboxBoxComp(props: IProps, ref: ForwardedRef<HTMLSelectE
   const [value, setValue] = useState("")
   
   useEffect(() => {
-    console.log(selectedValues)
-    setValue(selectedValues.join(", "))
+    setValue(selectedValues.join(", "));
   },[selectedValues.length]);
-  
-  useEffect(() => {
-    console.log(value);
-  },[value]);
 
   return (
     <>
