@@ -4,6 +4,8 @@ import { CollectionsController } from './collections.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Collection, CollectionSchema } from './entities/collection.entity';
 import { UsersModule } from '../users/users.module';
+import { CardsModule } from '../cards/cards.module';
+import { CardsService } from '../cards/cards.service';
 
 @Module({
   imports: [
@@ -11,6 +13,7 @@ import { UsersModule } from '../users/users.module';
       { name: Collection.name, schema: CollectionSchema },
     ]),
     UsersModule,
+    CardsModule,
   ],
   controllers: [CollectionsController],
   providers: [CollectionsService],

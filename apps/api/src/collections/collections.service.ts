@@ -5,12 +5,14 @@ import { CreateCollectionDto } from './dto/create-collection.dto';
 import { UpdateCollectionDto } from './dto/update-collection.dto';
 import { Collection } from './entities/collection.entity';
 import { User } from '../users/entities/user.entity';
+import { CardsService } from '../cards/cards.service';
 
 @Injectable()
 export class CollectionsService {
   constructor(
     @InjectModel(Collection.name) private collectionModel: Model<Collection>,
     @InjectModel(User.name) private userModel: Model<User>,
+    private readonly cardsService: CardsService,
   ) {}
 
   async create(createCollectionDto: CreateCollectionDto) {
@@ -36,6 +38,9 @@ export class CollectionsService {
   async findById(_id: string) {
     try {
       const collection = await this.collectionModel.findOne({ _id }).exec();
+
+      // const cards = this.cardsService.getCardBatch(collection.cards);
+      // console.log(cards);
       return collection;
     } catch (error) {
       throw error;
