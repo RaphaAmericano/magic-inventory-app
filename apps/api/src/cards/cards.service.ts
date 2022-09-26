@@ -1,35 +1,28 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { CardResume } from 'entities';
-
-const { SCRYFALL_API_URL } = process.env;
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class CardsService {
   constructor(private readonly httpService: HttpService) {}
 
+  private readonly SCRYFALL_API_URL: string = process.env.SCRYFALL_API_URL;
+
   async getCard(id: string) {
-    return this.httpService.get(`${SCRYFALL_API_URL}/cards/${id}`);
+    return this.httpService.get(`${this.SCRYFALL_API_URL}/cards/${id}`);
   }
 
   async getCardBatch(cardsResume: CardResume[]) {
-    const promise = this.httpService
-      .get(
-        `${SCRYFALL_API_URL}/cards/${'f295b713-1d6a-43fd-910d-fb35414bf58a'}`,
-      )
-      .toPromise();
-    console.log(promise);
-    promise.then(console.log);
-    const resolve = await this.httpService.axiosRef.get(
-      `${SCRYFALL_API_URL}/cards/${'f295b713-1d6a-43fd-910d-fb35414bf58a'}`,
+    const responses = await Promise.all(
+      cardsResume.map(
+        async ({ id }) =>
+          await lastValueFrom(
+            this.httpService.get(`${this.SCRYFALL_API_URL}/cards/${id}`),
+          ),
+      ),
     );
-    console.log(resolve);
 
-    return;
-    // return await Promise.all(
-    //   cardsResume.map(({ id }) =>
-    //     this.httpService.axiosRef.get(`${SCRYFALL_API_URL}/cards/${id}`),
-    //   ),
-    // );
+    return responses.map((response) => response.data);
   }
 }

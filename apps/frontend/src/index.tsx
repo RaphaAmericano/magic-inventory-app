@@ -8,6 +8,7 @@ import "@assets/styles/global.scss";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { SnackBarContainer } from "@components/SnackBarContainer";
+import { ModalContainer } from "@components/ModalContainer";
 
 const queryClient = new QueryClient()
 
@@ -17,6 +18,7 @@ ReactDOM.render(
       <BrowserRouter>
         <App />
         <SnackBarContainer />
+        <ModalContainer />
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>

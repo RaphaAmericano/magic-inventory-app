@@ -33,7 +33,7 @@ export function MainTable(props: IProps) {
       <TableRow key={JSON.stringify(item)}>
         {headings.map(({ key, label, isAction, isImage }) =>
           isAction ? (
-            <TableCell key={key}>
+            <TableCell key={key} >
               <Button onClick={item[key]}>{isImage ? <img src={label} /> : label}</Button>
             </TableCell>
           ) : (

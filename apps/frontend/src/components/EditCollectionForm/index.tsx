@@ -29,24 +29,25 @@ export function EditCollectionForm(props: IProps) {
   const {
     _doc: { _id: ownerId },
   } = user;
-  
+
   const [query, setQuery] = useState("");
   const searchQuery = useDebouce(query, 400);
 
-  const { data, isLoading  } = cardQueries.useGetCardSearch({ q: searchQuery });
+  const { data, isLoading } = cardQueries.useGetCardSearch({ q: searchQuery });
 
   useEffect(() => {
-    if(data){
-      updateCache(data.data)
+    if (data) {
+      updateCache(data.data);
     }
-  },[isLoading])
+  }, [isLoading]);
 
   const editCollectionForm = useEditCollectionForm();
   const watchShowCards = editCollectionForm.watch("cards", []);
 
   useEffect(() => {
+    const cardsQuantity = cards.map(({ id, quantity }) => ({ id, quantity }));
     editCollectionForm.setValue("name", name);
-    editCollectionForm.setValue("cards", cards);
+    editCollectionForm.setValue("cards", cardsQuantity);
   }, []);
 
   // useEffect(() => {
@@ -112,10 +113,10 @@ export function EditCollectionForm(props: IProps) {
   function remove(id: string) {
     const card = findCard(id);
     if (card) {
-      if(card.quantity > 0){
+      if (card.quantity > 0) {
         setCardsQuantity(card.id, card.quantity - 1);
       }
-    } 
+    }
   }
 
   return (

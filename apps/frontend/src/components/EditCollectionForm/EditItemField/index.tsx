@@ -16,7 +16,6 @@ export function EditItemField(props: IProps) {
   const { getCacheCard } = cardStore;
 
   const cacheCard = getCacheCard(id);
-  console.log(cacheCard);
 
   if(cacheCard){
     const { name } = cacheCard;

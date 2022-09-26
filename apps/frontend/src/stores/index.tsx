@@ -6,6 +6,7 @@ import { useAuth } from "./auth";
 import { useSnackBar } from "./snackbar";
 import { useCard } from "./card";
 import { useModal } from "./modal";
+import { useDialog } from "./dialog";
 
 interface Stores {
   counterStore: ReturnType<typeof useCounter>;
@@ -13,6 +14,7 @@ interface Stores {
   snackBarStore: ReturnType<typeof useSnackBar>;
   cardStore: ReturnType<typeof useCard>;
   modalStore: ReturnType<typeof useModal>;
+  dialogStore: ReturnType<typeof useDialog>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -28,6 +30,7 @@ export function StoresProvider(props: PropsWithChildren<ReactNode>) {
   const snackBarStore = useSnackBar();
   const cardStore = useCard();
   const modalStore = useModal();
+  const dialogStore = useDialog();
 
-  return <storesCtx.Provider value={{ counterStore, authStore, snackBarStore, cardStore, modalStore }}>{props.children}</storesCtx.Provider>;
+  return <storesCtx.Provider value={{ counterStore, authStore, snackBarStore, cardStore, modalStore, dialogStore }}>{props.children}</storesCtx.Provider>;
 }

@@ -4,7 +4,12 @@ import { HttpModule } from '@nestjs/axios';
 
 @Module({
   controllers: [],
-  imports: [HttpModule],
+  imports: [
+    HttpModule.register({
+      timeout: 5000,
+      maxRedirects: 5,
+    }),
+  ],
   providers: [CardsService],
   exports: [CardsService],
 })

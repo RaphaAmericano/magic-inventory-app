@@ -38,9 +38,10 @@ export class CollectionsService {
   async findById(_id: string) {
     try {
       const collection = await this.collectionModel.findOne({ _id }).exec();
-
-      // const cards = this.cardsService.getCardBatch(collection.cards);
-      // console.log(cards);
+      const cards = await this.cardsService.getCardBatch(collection.cards);
+      collection.cards.forEach((card, i) => {
+        collection.cards[i] = { ...collection.cards[i], ...cards[i] };
+      });
       return collection;
     } catch (error) {
       throw error;
