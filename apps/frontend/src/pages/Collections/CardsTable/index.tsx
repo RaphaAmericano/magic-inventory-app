@@ -12,8 +12,8 @@ export function CardsTable(props: IProps) {
   const { data, addFn } = props;
   const { data: sets } = setQueries.useGetSets();
 
-  const { modalStore } = useStores();
-  const { openFn, setChildren } = modalStore;
+  const { dialogStore } = useStores();
+  const { openFn, setChildren, setTitle } = dialogStore;
 
   const headings = [
     {
@@ -58,6 +58,7 @@ export function CardsTable(props: IProps) {
     console.log(id);
     const card = data.find(card => card.id === id);
     if(card){
+        setTitle(card.name);
         setChildren(<CardResume card={card} />);
         openFn();
     } else {

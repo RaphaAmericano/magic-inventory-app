@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { SnackBarContainer } from "@components/SnackBarContainer";
 import { ModalContainer } from "@components/ModalContainer";
+import { DialogContainer } from "@components/DialogContainer";
 
 const queryClient = new QueryClient()
 
@@ -19,6 +20,7 @@ ReactDOM.render(
         <App />
         <SnackBarContainer />
         <ModalContainer />
+        <DialogContainer />
       </BrowserRouter>
       <ReactQueryDevtools initialIsOpen={false}/>
     </QueryClientProvider>

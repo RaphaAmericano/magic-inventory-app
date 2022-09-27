@@ -62,7 +62,7 @@ export interface Card {
 }
 
 export type Color = "W" | "B" | "U" | "R" | "G" | "C";
-export type Legality = "legal" | "not_legal";
+export type Legality = "legal" | "not_legal" | "banned" | "restricted";
 export type Rarity = "common" | "uncommon" | "rare";
 export type BorderColor = "black" | "white";
 export interface Prices {

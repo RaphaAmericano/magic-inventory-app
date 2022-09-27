@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { InventorysModule } from './inventorys/inventorys.module';
 import { CollectionsModule } from './collections/collections.module';
 import { CardsModule } from './cards/cards.module';
+import { ScrapperModule } from './scrapper/scrapper.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CardsModule } from './cards/cards.module';
     InventorysModule,
     CollectionsModule,
     CardsModule,
+    ScrapperModule,
   ],
   controllers: [],
   providers: [],

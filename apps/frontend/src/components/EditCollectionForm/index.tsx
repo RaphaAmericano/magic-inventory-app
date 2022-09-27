@@ -146,7 +146,7 @@ export function EditCollectionForm(props: IProps) {
             </TableContainer>
           </Grid>
         )}
-        <Grid item>
+        <Grid item sx={ { display: "flex", gap: 1 } }>
           <Button variant="outlined" type="submit">
             Salvar
           </Button>
